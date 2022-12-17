@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="3e297f6009ee4319b22078f00a8d292f" Name="Diagram1">
+        <EntityTypeShape EntityType="FMirandaProgramacionNcapasModel.Area" Width="1.5" PointX="0.75" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="FMirandaProgramacionNcapasModel.Cliente" Width="1.5" PointX="10.75" PointY="11.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="FMirandaProgramacionNcapasModel.Colonia" Width="1.5" PointX="8" PointY="10" IsExpanded="true" />
+        <EntityTypeShape EntityType="FMirandaProgramacionNcapasModel.Departamento" Width="1.5" PointX="3" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="FMirandaProgramacionNcapasModel.Direccion" Width="1.5" PointX="10.25" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FMirandaProgramacionNcapasModel.Estado" Width="1.5" PointX="3.5" PointY="10.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="FMirandaProgramacionNcapasModel.Municipio" Width="1.5" PointX="5.75" PointY="10.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="FMirandaProgramacionNcapasModel.Pai" Width="1.5" PointX="1.25" PointY="10.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="FMirandaProgramacionNcapasModel.Producto" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="FMirandaProgramacionNcapasModel.Provedor" Width="1.5" PointX="3" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="FMirandaProgramacionNcapasModel.Rol" Width="1.5" PointX="5.75" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="FMirandaProgramacionNcapasModel.sysdiagram" Width="1.5" PointX="9.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FMirandaProgramacionNcapasModel.Usuario" Width="1.5" PointX="8" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="FMirandaProgramacionNcapasModel.Venta" Width="1.5" PointX="13" PointY="10" IsExpanded="true" />
+        <EntityTypeShape EntityType="FMirandaProgramacionNcapasModel.VentaCliente" Width="1.5" PointX="13" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FMirandaProgramacionNcapasModel.VentaProducto" Width="1.5" PointX="7.5" PointY="1.5" IsExpanded="true" />
+        <AssociationConnector Association="FMirandaProgramacionNcapasModel.FK_DepartamentoArea" ManuallyRouted="false" />
+        <AssociationConnector Association="FMirandaProgramacionNcapasModel.FK__Venta__IdCliente__1AD3FDA4" ManuallyRouted="false" />
+        <AssociationConnector Association="FMirandaProgramacionNcapasModel.FK__Venta__IdCliente__1DB06A4F" ManuallyRouted="false" />
+        <AssociationConnector Association="FMirandaProgramacionNcapasModel.FK__Colonia__IdMunic__4D94879B" ManuallyRouted="false" />
+        <AssociationConnector Association="FMirandaProgramacionNcapasModel.FK_Colonia" ManuallyRouted="false" />
+        <AssociationConnector Association="FMirandaProgramacionNcapasModel.FK__Producto__IdDepa__05D8E0BE" ManuallyRouted="false" />
+        <AssociationConnector Association="FMirandaProgramacionNcapasModel.FK_Usuario" ManuallyRouted="false" />
+        <AssociationConnector Association="FMirandaProgramacionNcapasModel.FK__Estado__IdPais__4F7CD00D" ManuallyRouted="false" />
+        <AssociationConnector Association="FMirandaProgramacionNcapasModel.FK__Municipio__IdEst__4E88ABD4" ManuallyRouted="false" />
+        <AssociationConnector Association="FMirandaProgramacionNcapasModel.FK__Producto__IdProv__04E4BC85" ManuallyRouted="false" />
+        <AssociationConnector Association="FMirandaProgramacionNcapasModel.FK__VentaProd__IdPro__160F4887" ManuallyRouted="false" />
+        <AssociationConnector Association="FMirandaProgramacionNcapasModel.FK__Usuario__IdRol__286302EC" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
