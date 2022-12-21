@@ -83,17 +83,46 @@ namespace PL.Controllers
                 }
 
             }
+            else
+            {
+                ML.Result result = BL.Departamento.Update(departamento);
 
+                if (result.Correct)
+                {
+                    ViewBag.Message = result.Message;
+                }
+                else
+                {
+                    ViewBag.Message ="Error:" + result.Message;
+                }
 
+            }
 
 
             return PartialView("Modal");
 
         }
 
-    
+        public ActionResult Delete(ML.Departamento departamento)
+        {
+            ML.Result result = BL.Departamento.Delete(departamento);
+            //if (departamento != null)
+            {
+                if (result.Correct)
+                {
+                    ViewBag.Message = result.Message;
 
-
+                }
+                else
+                {
+                    ViewBag.Message = "Error:" + result.Message;
+                }
+            }
+           
+            return PartialView("Modal");
+        }
+           
+       
 
 
     }
