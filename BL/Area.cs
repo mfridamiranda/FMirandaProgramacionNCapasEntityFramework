@@ -66,5 +66,42 @@ namespace BL
             return result;
                 
         }
+
+        public static ML.Result GetAllEF()
+        {
+            ML.Result result = new ML.Result();
+            try
+            {
+                using(DL_EF.FMirandaProgramacionNcapasEntities1 context = new DL_EF.FMirandaProgramacionNcapasEntities1())
+                {
+                    var query = context.AreaGetAll1().ToList();
+                    if (query != null)
+                    {
+                        result.Objects = new List<object>();
+
+                        foreach (var row in query)
+                        {
+                            ML.Area area = new ML.Area();
+
+                            area.IdArea = row.IdArea;
+                            area.Nombre = row.Nombre;
+
+                            result.Objects.Add(area);
+                        }
+                    }
+                }
+                result.Correct = true;
+
+            }
+            catch (Exception ex)
+            {
+                result.Correct=false;
+                result.ex = ex;
+                result.Message = "Ocurrio un error al consultar la tabla semestre" + result.ex;
+
+                throw;
+            }
+            return result;
+        }
     }
 }

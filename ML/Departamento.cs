@@ -17,7 +17,7 @@ namespace ML
 
         public ML.Area Area { get; set; } //  declarada como una propiedad
 
-
+        //public List<object> Areas { get; set; }
 
     }
 }

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="FMirandaProgramacionNcapasModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="FMirandaProgramacionNcapasModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Area">
           <Key>
             <PropertyRef Name="IdArea" />
@@ -297,6 +297,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="AreaGetAll" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="ColoniaGetByIdMunicipio" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="IdMunicipio" Type="int" Mode="In" />
         </Function>
@@ -312,6 +313,7 @@
           <Parameter Name="IdDepartamento" Type="int" Mode="In" />
         </Function>
         <Function Name="DepartamentoUpdate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdDepartamento" Type="int" Mode="In" />
           <Parameter Name="Nombre" Type="varchar" Mode="In" />
           <Parameter Name="IdArea" Type="int" Mode="In" />
         </Function>
@@ -497,113 +499,294 @@
             <End Role="Direccion" EntitySet="Direccion" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="FMirandaProgramacionNcapasModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="FMirandaProgramacionNcapasEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Areas" EntityType="FMirandaProgramacionNcapasModel.Area" />
+          <EntitySet Name="Colonias" EntityType="FMirandaProgramacionNcapasModel.Colonia" />
+          <EntitySet Name="Direccions" EntityType="FMirandaProgramacionNcapasModel.Direccion" />
+          <EntitySet Name="Estadoes" EntityType="FMirandaProgramacionNcapasModel.Estado" />
+          <EntitySet Name="Municipios" EntityType="FMirandaProgramacionNcapasModel.Municipio" />
+          <EntitySet Name="Pais" EntityType="FMirandaProgramacionNcapasModel.Pai" />
+          <EntitySet Name="Productoes" EntityType="FMirandaProgramacionNcapasModel.Producto" />
+          <EntitySet Name="Provedors" EntityType="FMirandaProgramacionNcapasModel.Provedor" />
+          <EntitySet Name="Rols" EntityType="FMirandaProgramacionNcapasModel.Rol" />
+          <EntitySet Name="Usuarios" EntityType="FMirandaProgramacionNcapasModel.Usuario" />
+          <EntitySet Name="Ventas" EntityType="FMirandaProgramacionNcapasModel.Venta" />
+          <EntitySet Name="VentaClientes" EntityType="FMirandaProgramacionNcapasModel.VentaCliente" />
+          <EntitySet Name="VentaProductoes" EntityType="FMirandaProgramacionNcapasModel.VentaProducto" />
+          <AssociationSet Name="FK__Colonia__IdMunic__4D94879B" Association="FMirandaProgramacionNcapasModel.FK__Colonia__IdMunic__4D94879B">
+            <End Role="Municipio" EntitySet="Municipios" />
+            <End Role="Colonia" EntitySet="Colonias" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Colonia" Association="FMirandaProgramacionNcapasModel.FK_Colonia">
+            <End Role="Colonia" EntitySet="Colonias" />
+            <End Role="Direccion" EntitySet="Direccions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuario" Association="FMirandaProgramacionNcapasModel.FK_Usuario">
+            <End Role="Usuario" EntitySet="Usuarios" />
+            <End Role="Direccion" EntitySet="Direccions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Estado__IdPais__4F7CD00D" Association="FMirandaProgramacionNcapasModel.FK__Estado__IdPais__4F7CD00D">
+            <End Role="Pai" EntitySet="Pais" />
+            <End Role="Estado" EntitySet="Estadoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Municipio__IdEst__4E88ABD4" Association="FMirandaProgramacionNcapasModel.FK__Municipio__IdEst__4E88ABD4">
+            <End Role="Estado" EntitySet="Estadoes" />
+            <End Role="Municipio" EntitySet="Municipios" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Producto__IdProv__04E4BC85" Association="FMirandaProgramacionNcapasModel.FK__Producto__IdProv__04E4BC85">
+            <End Role="Provedor" EntitySet="Provedors" />
+            <End Role="Producto" EntitySet="Productoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__VentaProd__IdPro__160F4887" Association="FMirandaProgramacionNcapasModel.FK__VentaProd__IdPro__160F4887">
+            <End Role="Producto" EntitySet="Productoes" />
+            <End Role="VentaProducto" EntitySet="VentaProductoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Usuario__IdRol__286302EC" Association="FMirandaProgramacionNcapasModel.FK__Usuario__IdRol__286302EC">
+            <End Role="Rol" EntitySet="Rols" />
+            <End Role="Usuario" EntitySet="Usuarios" />
+          </AssociationSet>
+          <FunctionImport Name="ColoniaGetByIdMunicipio" ReturnType="Collection(FMirandaProgramacionNcapasModel.ColoniaGetByIdMunicipio_Result)">
+          <Parameter Name="IdMunicipio" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="DepartamentoAdd">
+            <Parameter Name="Nombre" Mode="In" Type="String" />
+            <Parameter Name="IdArea" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="DepartamentoDelete">
+          <Parameter Name="IdDepartamento" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="DepartamentoGetAll" ReturnType="Collection(FMirandaProgramacionNcapasModel.DepartamentoGetAll_Result)" />
+          <FunctionImport Name="DepartamentoGetById" ReturnType="Collection(FMirandaProgramacionNcapasModel.DepartamentoGetById_Result)">
+          <Parameter Name="IdDepartamento" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="DepartamentoUpdate">
+            <Parameter Name="IdDepartamento" Mode="In" Type="Int32" />
+            <Parameter Name="Nombre" Mode="In" Type="String" />
+            <Parameter Name="IdArea" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="DireccionGetByIdColonia" ReturnType="Collection(FMirandaProgramacionNcapasModel.DireccionGetByIdColonia_Result)">
+          <Parameter Name="IdColonia" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="EstadoGetByIdPais" ReturnType="Collection(FMirandaProgramacionNcapasModel.EstadoGetByIdPais_Result)">
+          <Parameter Name="IdPais" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="MunicipioGetByIdEstado" ReturnType="Collection(FMirandaProgramacionNcapasModel.MunicipioGetByIdEstado_Result)">
+          <Parameter Name="IdEstado" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="PaisGetAll" ReturnType="Collection(String)" />
+          <FunctionImport Name="PaisGetById" ReturnType="Collection(FMirandaProgramacionNcapasModel.PaisGetById_Result)">
+          <Parameter Name="IdPais" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ProductoAdd">
+            <Parameter Name="ProductoNombre" Mode="In" Type="String" />
+            <Parameter Name="PrecioUnitario" Mode="In" Type="Decimal" />
+            <Parameter Name="Stock" Mode="In" Type="Int32" />
+            <Parameter Name="Descripcion" Mode="In" Type="String" />
+            <Parameter Name="IdProvedor" Mode="In" Type="Int32" />
+            <Parameter Name="IdDepartamento" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ProductoDelete">
+          <Parameter Name="IdProducto" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ProductoGetAll" ReturnType="Collection(FMirandaProgramacionNcapasModel.ProductoGetAll_Result)" />
+          <FunctionImport Name="ProductoGetById" ReturnType="Collection(FMirandaProgramacionNcapasModel.ProductoGetById_Result)">
+          <Parameter Name="IdProducto" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ProductoUpDate">
+            <Parameter Name="IdProducto" Mode="In" Type="Int32" />
+            <Parameter Name="ProductoNombre" Mode="In" Type="String" />
+            <Parameter Name="PrecioUnitario" Mode="In" Type="Decimal" />
+            <Parameter Name="Stock" Mode="In" Type="Int32" />
+            <Parameter Name="Descripcion" Mode="In" Type="String" />
+            <Parameter Name="IdProvedor" Mode="In" Type="Int32" />
+            <Parameter Name="IdDepartamento" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="RolGetAll" />
+          <FunctionImport Name="UsuarioAdd">
+            <Parameter Name="Nombre" Mode="In" Type="String" />
+            <Parameter Name="ApellidoPaterno" Mode="In" Type="String" />
+            <Parameter Name="NombredeUsuario" Mode="In" Type="String" />
+            <Parameter Name="FechadeNacimiento" Mode="In" Type="String" />
+            <Parameter Name="Genero" Mode="In" Type="String" />
+            <Parameter Name="Email" Mode="In" Type="String" />
+            <Parameter Name="Password" Mode="In" Type="String" />
+            <Parameter Name="Telefono" Mode="In" Type="String" />
+            <Parameter Name="Celular" Mode="In" Type="String" />
+            <Parameter Name="CURP" Mode="In" Type="String" />
+            <Parameter Name="ApellidoMaterno" Mode="In" Type="String" />
+            <Parameter Name="IdRol" Mode="In" Type="Int32" />
+            <Parameter Name="NumeroInterior" Mode="In" Type="String" />
+            <Parameter Name="NumeroExterior" Mode="In" Type="String" />
+            <Parameter Name="IdUsuario" Mode="In" Type="Int32" />
+            <Parameter Name="IdColonia" Mode="In" Type="Int32" />
+            <Parameter Name="Calle" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="UsuarioDelete">
+          <Parameter Name="IdUsuario" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="UsuarioGetAll" ReturnType="Collection(FMirandaProgramacionNcapasModel.UsuarioGetAll_Result)">
+            <Parameter Name="Nombre" Mode="In" Type="String" />
+            <Parameter Name="ApellidoPaterno" Mode="In" Type="String" />
+            <Parameter Name="IdRol" Mode="In" Type="Int32" />
+            <Parameter Name="Status" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="UsuarioGetById" ReturnType="Collection(FMirandaProgramacionNcapasModel.UsuarioGetById_Result)">
+            <Parameter Name="IdUsuario" Mode="In" Type="Int32" />
+            <Parameter Name="Status" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="UsuarioUpdate">
+            <Parameter Name="IdUsuario" Mode="In" Type="Int32" />
+            <Parameter Name="Nombre" Mode="In" Type="String" />
+            <Parameter Name="ApellidoPaterno" Mode="In" Type="String" />
+            <Parameter Name="NombredeUsuario" Mode="In" Type="String" />
+            <Parameter Name="FechadeNacimiento" Mode="In" Type="String" />
+            <Parameter Name="Genero" Mode="In" Type="String" />
+            <Parameter Name="Email" Mode="In" Type="String" />
+            <Parameter Name="Password" Mode="In" Type="String" />
+            <Parameter Name="Telefono" Mode="In" Type="String" />
+            <Parameter Name="Celular" Mode="In" Type="String" />
+            <Parameter Name="CURP" Mode="In" Type="String" />
+            <Parameter Name="ApellidoMaterno" Mode="In" Type="String" />
+            <Parameter Name="IdRol" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="Cliente1" EntityType="FMirandaProgramacionNcapasModel.Cliente1" />
+          <AssociationSet Name="FK__Venta__IdCliente__1AD3FDA4" Association="FMirandaProgramacionNcapasModel.FK__Venta__IdCliente__1AD3FDA4">
+            <End Role="Cliente1" EntitySet="Cliente1" />
+            <End Role="VentaCliente" EntitySet="VentaClientes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Venta__IdCliente__1DB06A4F" Association="FMirandaProgramacionNcapasModel.FK__Venta__IdCliente__1DB06A4F">
+            <End Role="Cliente1" EntitySet="Cliente1" />
+            <End Role="Venta" EntitySet="Ventas" />
+          </AssociationSet>
+          <EntitySet Name="Departamentoes" EntityType="FMirandaProgramacionNcapasModel.Departamento" />
+          <EntitySet Name="sysdiagrams" EntityType="FMirandaProgramacionNcapasModel.sysdiagram" />
+          <AssociationSet Name="FK_DepartamentoArea" Association="FMirandaProgramacionNcapasModel.FK_DepartamentoArea">
+            <End EntitySet="Areas" Role="Area" />
+            <End EntitySet="Departamentoes" Role="Departamento" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Producto__IdDepa__05D8E0BE" Association="FMirandaProgramacionNcapasModel.FK__Producto__IdDepa__05D8E0BE">
+            <End EntitySet="Departamentoes" Role="Departamento" />
+            <End EntitySet="Productoes" Role="Producto" />
+          </AssociationSet>
+          <FunctionImport Name="sp_alterdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_creatediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(FMirandaProgramacionNcapasModel.sp_helpdiagramdefinition_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(FMirandaProgramacionNcapasModel.sp_helpdiagrams_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_renamediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams" />
+          <FunctionImport Name="AreaGetAll" ReturnType="Collection(String)" />
+          <FunctionImport Name="AreaGetAll1" ReturnType="Collection(FMirandaProgramacionNcapasModel.AreaGetAll1_Result)" />
+        </EntityContainer>
         <EntityType Name="Area">
           <Key>
             <PropertyRef Name="IdArea" />
           </Key>
           <Property Name="IdArea" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Departamentoes" Relationship="Self.FK_DepartamentoArea" FromRole="Area" ToRole="Departamento" />
-        </EntityType>
-        <EntityType Name="Cliente">
-          <Key>
-            <PropertyRef Name="IdCliente" />
-          </Key>
-          <Property Name="IdCliente" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="NombreCliente" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="IdVenta" Type="Int32" />
-          <NavigationProperty Name="VentaClientes" Relationship="Self.FK__Venta__IdCliente__1AD3FDA4" FromRole="Cliente" ToRole="VentaCliente" />
-          <NavigationProperty Name="Ventas" Relationship="Self.FK__Venta__IdCliente__1DB06A4F" FromRole="Cliente" ToRole="Venta" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Departamentoes" Relationship="FMirandaProgramacionNcapasModel.FK_DepartamentoArea" FromRole="Area" ToRole="Departamento" />
         </EntityType>
         <EntityType Name="Colonia">
           <Key>
             <PropertyRef Name="IdColonia" />
           </Key>
           <Property Name="IdColonia" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="CodigoPostal" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CodigoPostal" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="IdMunicipio" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Municipio" Relationship="Self.FK__Colonia__IdMunic__4D94879B" FromRole="Colonia" ToRole="Municipio" />
-          <NavigationProperty Name="Direccions" Relationship="Self.FK_Colonia" FromRole="Colonia" ToRole="Direccion" />
-        </EntityType>
-        <EntityType Name="Departamento">
-          <Key>
-            <PropertyRef Name="IdDepartamento" />
-          </Key>
-          <Property Name="IdDepartamento" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="IdArea" Type="Int32" />
-          <NavigationProperty Name="Area" Relationship="Self.FK_DepartamentoArea" FromRole="Departamento" ToRole="Area" />
-          <NavigationProperty Name="Productoes" Relationship="Self.FK__Producto__IdDepa__05D8E0BE" FromRole="Departamento" ToRole="Producto" />
+          <NavigationProperty Name="Municipio" Relationship="FMirandaProgramacionNcapasModel.FK__Colonia__IdMunic__4D94879B" FromRole="Colonia" ToRole="Municipio" />
+          <NavigationProperty Name="Direccions" Relationship="FMirandaProgramacionNcapasModel.FK_Colonia" FromRole="Colonia" ToRole="Direccion" />
         </EntityType>
         <EntityType Name="Direccion">
           <Key>
             <PropertyRef Name="IdDireccion" />
           </Key>
           <Property Name="IdDireccion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="NumeroInterior" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="NumeroExterior" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NumeroInterior" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="NumeroExterior" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="IdUsuario" Type="Int32" Nullable="false" />
           <Property Name="IdColonia" Type="Int32" Nullable="false" />
           <Property Name="Calle" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Colonia" Relationship="Self.FK_Colonia" FromRole="Direccion" ToRole="Colonia" />
-          <NavigationProperty Name="Usuario" Relationship="Self.FK_Usuario" FromRole="Direccion" ToRole="Usuario" />
+          <NavigationProperty Name="Colonia" Relationship="FMirandaProgramacionNcapasModel.FK_Colonia" FromRole="Direccion" ToRole="Colonia" />
+          <NavigationProperty Name="Usuario" Relationship="FMirandaProgramacionNcapasModel.FK_Usuario" FromRole="Direccion" ToRole="Usuario" />
         </EntityType>
         <EntityType Name="Estado">
           <Key>
             <PropertyRef Name="IdEstado" />
           </Key>
           <Property Name="IdEstado" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="IdPais" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Pai" Relationship="Self.FK__Estado__IdPais__4F7CD00D" FromRole="Estado" ToRole="Pais" />
-          <NavigationProperty Name="Municipios" Relationship="Self.FK__Municipio__IdEst__4E88ABD4" FromRole="Estado" ToRole="Municipio" />
+          <NavigationProperty Name="Pai" Relationship="FMirandaProgramacionNcapasModel.FK__Estado__IdPais__4F7CD00D" FromRole="Estado" ToRole="Pai" />
+          <NavigationProperty Name="Municipios" Relationship="FMirandaProgramacionNcapasModel.FK__Municipio__IdEst__4E88ABD4" FromRole="Estado" ToRole="Municipio" />
         </EntityType>
         <EntityType Name="Municipio">
           <Key>
             <PropertyRef Name="IdMunicipio" />
           </Key>
           <Property Name="IdMunicipio" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="IdEstado" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Colonias" Relationship="Self.FK__Colonia__IdMunic__4D94879B" FromRole="Municipio" ToRole="Colonia" />
-          <NavigationProperty Name="Estado" Relationship="Self.FK__Municipio__IdEst__4E88ABD4" FromRole="Municipio" ToRole="Estado" />
+          <NavigationProperty Name="Colonias" Relationship="FMirandaProgramacionNcapasModel.FK__Colonia__IdMunic__4D94879B" FromRole="Municipio" ToRole="Colonia" />
+          <NavigationProperty Name="Estado" Relationship="FMirandaProgramacionNcapasModel.FK__Municipio__IdEst__4E88ABD4" FromRole="Municipio" ToRole="Estado" />
         </EntityType>
         <EntityType Name="Pai">
           <Key>
             <PropertyRef Name="IdPais" />
           </Key>
           <Property Name="IdPais" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Estadoes" Relationship="Self.FK__Estado__IdPais__4F7CD00D" FromRole="Pais" ToRole="Estado" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Estadoes" Relationship="FMirandaProgramacionNcapasModel.FK__Estado__IdPais__4F7CD00D" FromRole="Pai" ToRole="Estado" />
         </EntityType>
         <EntityType Name="Producto">
           <Key>
             <PropertyRef Name="IdProducto" />
           </Key>
           <Property Name="IdProducto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ProductoNombre" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="PrecioUnitario" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="ProductoNombre" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="PrecioUnitario" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
           <Property Name="Stock" Type="Int32" Nullable="false" />
           <Property Name="Descripcion" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="IdProvedor" Type="Int32" />
           <Property Name="IdDepartamento" Type="Int32" />
-          <NavigationProperty Name="Departamento" Relationship="Self.FK__Producto__IdDepa__05D8E0BE" FromRole="Producto" ToRole="Departamento" />
-          <NavigationProperty Name="Provedor" Relationship="Self.FK__Producto__IdProv__04E4BC85" FromRole="Producto" ToRole="Provedor" />
-          <NavigationProperty Name="VentaProductoes" Relationship="Self.FK__VentaProd__IdPro__160F4887" FromRole="Producto" ToRole="VentaProducto" />
+          <NavigationProperty Name="Provedor" Relationship="FMirandaProgramacionNcapasModel.FK__Producto__IdProv__04E4BC85" FromRole="Producto" ToRole="Provedor" />
+          <NavigationProperty Name="VentaProductoes" Relationship="FMirandaProgramacionNcapasModel.FK__VentaProd__IdPro__160F4887" FromRole="Producto" ToRole="VentaProducto" />
+          <NavigationProperty Name="Departamento" Relationship="FMirandaProgramacionNcapasModel.FK__Producto__IdDepa__05D8E0BE" FromRole="Producto" ToRole="Departamento" />
         </EntityType>
         <EntityType Name="Provedor">
           <Key>
             <PropertyRef Name="IdProvedor" />
           </Key>
           <Property Name="IdProvedor" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Telefono" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Productoes" Relationship="Self.FK__Producto__IdProv__04E4BC85" FromRole="Provedor" ToRole="Producto" />
+          <Property Name="Telefono" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Productoes" Relationship="FMirandaProgramacionNcapasModel.FK__Producto__IdProv__04E4BC85" FromRole="Provedor" ToRole="Producto" />
         </EntityType>
         <EntityType Name="Rol">
           <Key>
@@ -611,17 +794,7 @@
           </Key>
           <Property Name="IdRol" Type="Byte" Nullable="false" />
           <Property Name="RolNombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Usuarios" Relationship="Self.FK__Usuario__IdRol__286302EC" FromRole="Rol" ToRole="Usuario" />
-        </EntityType>
-        <EntityType Name="sysdiagram">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="Usuarios" Relationship="FMirandaProgramacionNcapasModel.FK__Usuario__IdRol__286302EC" FromRole="Rol" ToRole="Usuario" />
         </EntityType>
         <EntityType Name="Usuario">
           <Key>
@@ -631,7 +804,7 @@
           <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="ApellidoPaterno" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="NombredeUsuario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="FechadeNacimiento" Type="DateTime" />
+          <Property Name="FechadeNacimiento" Type="DateTime" Precision="0" />
           <Property Name="Genero" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
           <Property Name="Email" Type="String" MaxLength="254" FixedLength="false" Unicode="false" />
           <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
@@ -641,8 +814,8 @@
           <Property Name="ApellidoMaterno" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="IdRol" Type="Byte" />
           <Property Name="Status" Type="Boolean" />
-          <NavigationProperty Name="Direccions" Relationship="Self.FK_Usuario" FromRole="Usuario" ToRole="Direccion" />
-          <NavigationProperty Name="Rol" Relationship="Self.FK__Usuario__IdRol__286302EC" FromRole="Usuario" ToRole="Rol" />
+          <NavigationProperty Name="Direccions" Relationship="FMirandaProgramacionNcapasModel.FK_Usuario" FromRole="Usuario" ToRole="Direccion" />
+          <NavigationProperty Name="Rol" Relationship="FMirandaProgramacionNcapasModel.FK__Usuario__IdRol__286302EC" FromRole="Usuario" ToRole="Rol" />
         </EntityType>
         <EntityType Name="Venta">
           <Key>
@@ -650,9 +823,9 @@
           </Key>
           <Property Name="IdVenta" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="IdCliente" Type="Int32" />
-          <Property Name="Total" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Total" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
           <Property Name="Fecha" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Cliente" Relationship="Self.FK__Venta__IdCliente__1DB06A4F" FromRole="Venta" ToRole="Cliente" />
+          <NavigationProperty Name="Cliente" Relationship="FMirandaProgramacionNcapasModel.FK__Venta__IdCliente__1DB06A4F" FromRole="Venta" ToRole="Cliente1" />
         </EntityType>
         <EntityType Name="VentaCliente">
           <Key>
@@ -660,9 +833,9 @@
           </Key>
           <Property Name="IdVenta" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="IdCliente" Type="Int32" />
-          <Property Name="Total" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Total" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
           <Property Name="Fecha" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Cliente" Relationship="Self.FK__Venta__IdCliente__1AD3FDA4" FromRole="VentaCliente" ToRole="Cliente" />
+          <NavigationProperty Name="Cliente" Relationship="FMirandaProgramacionNcapasModel.FK__Venta__IdCliente__1AD3FDA4" FromRole="VentaCliente" ToRole="Cliente1" />
         </EntityType>
         <EntityType Name="VentaProducto">
           <Key>
@@ -672,47 +845,11 @@
           <Property Name="Cantidad" Type="Int32" Nullable="false" />
           <Property Name="IdProducto" Type="Int32" />
           <Property Name="ProductoNombre" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Producto" Relationship="Self.FK__VentaProd__IdPro__160F4887" FromRole="VentaProducto" ToRole="Producto" />
+          <NavigationProperty Name="Producto" Relationship="FMirandaProgramacionNcapasModel.FK__VentaProd__IdPro__160F4887" FromRole="VentaProducto" ToRole="Producto" />
         </EntityType>
-        <Association Name="FK_DepartamentoArea">
-          <End Role="Area" Type="Self.Area" Multiplicity="0..1" />
-          <End Role="Departamento" Type="Self.Departamento" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Area">
-              <PropertyRef Name="IdArea" />
-            </Principal>
-            <Dependent Role="Departamento">
-              <PropertyRef Name="IdArea" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Venta__IdCliente__1AD3FDA4">
-          <End Role="Cliente" Type="Self.Cliente" Multiplicity="0..1" />
-          <End Role="VentaCliente" Type="Self.VentaCliente" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Cliente">
-              <PropertyRef Name="IdCliente" />
-            </Principal>
-            <Dependent Role="VentaCliente">
-              <PropertyRef Name="IdCliente" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Venta__IdCliente__1DB06A4F">
-          <End Role="Cliente" Type="Self.Cliente" Multiplicity="0..1" />
-          <End Role="Venta" Type="Self.Venta" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Cliente">
-              <PropertyRef Name="IdCliente" />
-            </Principal>
-            <Dependent Role="Venta">
-              <PropertyRef Name="IdCliente" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__Colonia__IdMunic__4D94879B">
-          <End Role="Municipio" Type="Self.Municipio" Multiplicity="1" />
-          <End Role="Colonia" Type="Self.Colonia" Multiplicity="*" />
+          <End Type="FMirandaProgramacionNcapasModel.Municipio" Role="Municipio" Multiplicity="1" />
+          <End Type="FMirandaProgramacionNcapasModel.Colonia" Role="Colonia" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Municipio">
               <PropertyRef Name="IdMunicipio" />
@@ -723,8 +860,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Colonia">
-          <End Role="Colonia" Type="Self.Colonia" Multiplicity="1" />
-          <End Role="Direccion" Type="Self.Direccion" Multiplicity="*" />
+          <End Type="FMirandaProgramacionNcapasModel.Colonia" Role="Colonia" Multiplicity="1" />
+          <End Type="FMirandaProgramacionNcapasModel.Direccion" Role="Direccion" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Colonia">
               <PropertyRef Name="IdColonia" />
@@ -734,21 +871,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Producto__IdDepa__05D8E0BE">
-          <End Role="Departamento" Type="Self.Departamento" Multiplicity="0..1" />
-          <End Role="Producto" Type="Self.Producto" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Departamento">
-              <PropertyRef Name="IdDepartamento" />
-            </Principal>
-            <Dependent Role="Producto">
-              <PropertyRef Name="IdDepartamento" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Usuario">
-          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
-          <End Role="Direccion" Type="Self.Direccion" Multiplicity="*" />
+          <End Type="FMirandaProgramacionNcapasModel.Usuario" Role="Usuario" Multiplicity="1" />
+          <End Type="FMirandaProgramacionNcapasModel.Direccion" Role="Direccion" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Usuario">
               <PropertyRef Name="IdUsuario" />
@@ -759,10 +884,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Estado__IdPais__4F7CD00D">
-          <End Role="Pais" Type="Self.Pai" Multiplicity="1" />
-          <End Role="Estado" Type="Self.Estado" Multiplicity="*" />
+          <End Type="FMirandaProgramacionNcapasModel.Pai" Role="Pai" Multiplicity="1" />
+          <End Type="FMirandaProgramacionNcapasModel.Estado" Role="Estado" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Pais">
+            <Principal Role="Pai">
               <PropertyRef Name="IdPais" />
             </Principal>
             <Dependent Role="Estado">
@@ -771,8 +896,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Municipio__IdEst__4E88ABD4">
-          <End Role="Estado" Type="Self.Estado" Multiplicity="1" />
-          <End Role="Municipio" Type="Self.Municipio" Multiplicity="*" />
+          <End Type="FMirandaProgramacionNcapasModel.Estado" Role="Estado" Multiplicity="1" />
+          <End Type="FMirandaProgramacionNcapasModel.Municipio" Role="Municipio" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Estado">
               <PropertyRef Name="IdEstado" />
@@ -783,8 +908,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Producto__IdProv__04E4BC85">
-          <End Role="Provedor" Type="Self.Provedor" Multiplicity="0..1" />
-          <End Role="Producto" Type="Self.Producto" Multiplicity="*" />
+          <End Type="FMirandaProgramacionNcapasModel.Provedor" Role="Provedor" Multiplicity="0..1" />
+          <End Type="FMirandaProgramacionNcapasModel.Producto" Role="Producto" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Provedor">
               <PropertyRef Name="IdProvedor" />
@@ -795,8 +920,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__VentaProd__IdPro__160F4887">
-          <End Role="Producto" Type="Self.Producto" Multiplicity="0..1" />
-          <End Role="VentaProducto" Type="Self.VentaProducto" Multiplicity="*" />
+          <End Type="FMirandaProgramacionNcapasModel.Producto" Role="Producto" Multiplicity="0..1" />
+          <End Type="FMirandaProgramacionNcapasModel.VentaProducto" Role="VentaProducto" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Producto">
               <PropertyRef Name="IdProducto" />
@@ -807,8 +932,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Usuario__IdRol__286302EC">
-          <End Role="Rol" Type="Self.Rol" Multiplicity="0..1" />
-          <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
+          <End Type="FMirandaProgramacionNcapasModel.Rol" Role="Rol" Multiplicity="0..1" />
+          <End Type="FMirandaProgramacionNcapasModel.Usuario" Role="Usuario" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Rol">
               <PropertyRef Name="IdRol" />
@@ -818,195 +943,429 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="FMirandaProgramacionNcapasEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Areas" EntityType="Self.Area" />
-          <EntitySet Name="Clientes" EntityType="Self.Cliente" />
-          <EntitySet Name="Colonias" EntityType="Self.Colonia" />
-          <EntitySet Name="Departamentoes" EntityType="Self.Departamento" />
-          <EntitySet Name="Direccions" EntityType="Self.Direccion" />
-          <EntitySet Name="Estadoes" EntityType="Self.Estado" />
-          <EntitySet Name="Municipios" EntityType="Self.Municipio" />
-          <EntitySet Name="Pais" EntityType="Self.Pai" />
-          <EntitySet Name="Productoes" EntityType="Self.Producto" />
-          <EntitySet Name="Provedors" EntityType="Self.Provedor" />
-          <EntitySet Name="Rols" EntityType="Self.Rol" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
-          <EntitySet Name="Usuarios" EntityType="Self.Usuario" />
-          <EntitySet Name="Ventas" EntityType="Self.Venta" />
-          <EntitySet Name="VentaClientes" EntityType="Self.VentaCliente" />
-          <EntitySet Name="VentaProductoes" EntityType="Self.VentaProducto" />
-          <AssociationSet Name="FK_DepartamentoArea" Association="Self.FK_DepartamentoArea">
-            <End Role="Area" EntitySet="Areas" />
-            <End Role="Departamento" EntitySet="Departamentoes" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Venta__IdCliente__1AD3FDA4" Association="Self.FK__Venta__IdCliente__1AD3FDA4">
-            <End Role="Cliente" EntitySet="Clientes" />
-            <End Role="VentaCliente" EntitySet="VentaClientes" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Venta__IdCliente__1DB06A4F" Association="Self.FK__Venta__IdCliente__1DB06A4F">
-            <End Role="Cliente" EntitySet="Clientes" />
-            <End Role="Venta" EntitySet="Ventas" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Colonia__IdMunic__4D94879B" Association="Self.FK__Colonia__IdMunic__4D94879B">
-            <End Role="Municipio" EntitySet="Municipios" />
-            <End Role="Colonia" EntitySet="Colonias" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Colonia" Association="Self.FK_Colonia">
-            <End Role="Colonia" EntitySet="Colonias" />
-            <End Role="Direccion" EntitySet="Direccions" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Producto__IdDepa__05D8E0BE" Association="Self.FK__Producto__IdDepa__05D8E0BE">
-            <End Role="Departamento" EntitySet="Departamentoes" />
-            <End Role="Producto" EntitySet="Productoes" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Usuario" Association="Self.FK_Usuario">
-            <End Role="Usuario" EntitySet="Usuarios" />
-            <End Role="Direccion" EntitySet="Direccions" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Estado__IdPais__4F7CD00D" Association="Self.FK__Estado__IdPais__4F7CD00D">
-            <End Role="Pais" EntitySet="Pais" />
-            <End Role="Estado" EntitySet="Estadoes" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Municipio__IdEst__4E88ABD4" Association="Self.FK__Municipio__IdEst__4E88ABD4">
-            <End Role="Estado" EntitySet="Estadoes" />
-            <End Role="Municipio" EntitySet="Municipios" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Producto__IdProv__04E4BC85" Association="Self.FK__Producto__IdProv__04E4BC85">
-            <End Role="Provedor" EntitySet="Provedors" />
-            <End Role="Producto" EntitySet="Productoes" />
-          </AssociationSet>
-          <AssociationSet Name="FK__VentaProd__IdPro__160F4887" Association="Self.FK__VentaProd__IdPro__160F4887">
-            <End Role="Producto" EntitySet="Productoes" />
-            <End Role="VentaProducto" EntitySet="VentaProductoes" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Usuario__IdRol__286302EC" Association="Self.FK__Usuario__IdRol__286302EC">
-            <End Role="Rol" EntitySet="Rols" />
-            <End Role="Usuario" EntitySet="Usuarios" />
-          </AssociationSet>
-        </EntityContainer>
+        <ComplexType Name="ColoniaGetByIdMunicipio_Result">
+          <Property Type="Int32" Name="Nombre" Nullable="false" />
+          <Property Type="String" Name="CodigoPostal" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="IdMunicipio" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="DepartamentoGetAll_Result">
+          <Property Type="Int32" Name="IdDepartamento" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="100" />
+          <Property Type="Int32" Name="IdArea" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="DepartamentoGetById_Result">
+          <Property Type="Int32" Name="IdDepartamento" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="100" />
+          <Property Type="Int32" Name="IdArea" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="DireccionGetByIdColonia_Result">
+          <Property Type="Int32" Name="IdDireccion" Nullable="false" />
+          <Property Type="String" Name="NumeroInterior" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="NumeroExterior" Nullable="false" MaxLength="20" />
+          <Property Type="Int32" Name="IdUsuario" Nullable="false" />
+          <Property Type="String" Name="Calle" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="EstadoGetByIdPais_Result">
+          <Property Type="Int32" Name="Nombre" Nullable="false" />
+          <Property Type="Int32" Name="IdPais" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="MunicipioGetByIdEstado_Result">
+          <Property Type="Int32" Name="Nombre" Nullable="false" />
+          <Property Type="Int32" Name="IdEstado" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="PaisGetById_Result">
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="IdPais" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="ProductoGetAll_Result">
+          <Property Type="String" Name="ProductoNombre" Nullable="false" MaxLength="200" />
+          <Property Type="Decimal" Name="PrecioUnitario" Nullable="false" Precision="18" Scale="2" />
+          <Property Type="Int32" Name="Stock" Nullable="false" />
+          <Property Type="String" Name="Descripcion" Nullable="true" MaxLength="500" />
+          <Property Type="Int32" Name="IdDepartamento" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="ProductoGetById_Result">
+          <Property Type="Int32" Name="IdProducto" Nullable="false" />
+          <Property Type="String" Name="ProductoNombre" Nullable="false" MaxLength="200" />
+          <Property Type="Decimal" Name="PrecioUnitario" Nullable="false" Precision="18" Scale="2" />
+          <Property Type="Int32" Name="Stock" Nullable="false" />
+          <Property Type="String" Name="Descripcion" Nullable="true" MaxLength="500" />
+          <Property Type="Int32" Name="IdProducto1" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="UsuarioGetAll_Result">
+          <Property Type="Int32" Name="IdUsuario" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ApellidoPaterno" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="NombredeUsuario" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="FechadeNacimiento" Nullable="true" />
+          <Property Type="String" Name="Genero" Nullable="true" MaxLength="1" />
+          <Property Type="String" Name="Email" Nullable="true" MaxLength="254" />
+          <Property Type="String" Name="Password" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Telefono" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="Celular" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="CURP" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ApellidoMaterno" Nullable="true" MaxLength="50" />
+          <Property Type="Byte" Name="IdRol" Nullable="true" />
+          <Property Type="Boolean" Name="Status" Nullable="true" />
+          <Property Type="String" Name="RolNombre" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="IdDireccion" Nullable="false" />
+          <Property Type="Int32" Name="IdColonia" Nullable="false" />
+          <Property Type="String" Name="MunicipioNombre" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="IdMunicipio" Nullable="false" />
+          <Property Type="String" Name="EstadoNombre" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="IdEstado" Nullable="false" />
+          <Property Type="String" Name="EstadoNombre1" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="IdPais" Nullable="false" />
+          <Property Type="String" Name="PaisNombre" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="UsuarioGetById_Result">
+          <Property Type="Int32" Name="IdUsuario" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ApellidoPaterno" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="NombredeUsuario" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="FechadeNacimiento" Nullable="true" />
+          <Property Type="String" Name="Genero" Nullable="true" MaxLength="1" />
+          <Property Type="String" Name="Email" Nullable="true" MaxLength="254" />
+          <Property Type="String" Name="Password" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Telefono" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="Celular" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="CURP" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ApellidoMaterno" Nullable="true" MaxLength="50" />
+          <Property Type="Byte" Name="IdRol" Nullable="true" />
+          <Property Type="Boolean" Name="Status" Nullable="true" />
+        </ComplexType>
+        <EntityType Name="Cliente1">
+          <Key>
+            <PropertyRef Name="IdCliente" />
+          </Key>
+          <Property Name="IdCliente" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NombreCliente" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="IdVenta" Type="Int32" />
+          <NavigationProperty Name="VentaClientes" Relationship="FMirandaProgramacionNcapasModel.FK__Venta__IdCliente__1AD3FDA4" FromRole="Cliente1" ToRole="VentaCliente" />
+          <NavigationProperty Name="Ventas" Relationship="FMirandaProgramacionNcapasModel.FK__Venta__IdCliente__1DB06A4F" FromRole="Cliente1" ToRole="Venta" />
+        </EntityType>
+        <Association Name="FK__Venta__IdCliente__1AD3FDA4">
+          <End Type="FMirandaProgramacionNcapasModel.Cliente1" Role="Cliente1" Multiplicity="0..1" />
+          <End Type="FMirandaProgramacionNcapasModel.VentaCliente" Role="VentaCliente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente1">
+              <PropertyRef Name="IdCliente" />
+            </Principal>
+            <Dependent Role="VentaCliente">
+              <PropertyRef Name="IdCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Venta__IdCliente__1DB06A4F">
+          <End Type="FMirandaProgramacionNcapasModel.Cliente1" Role="Cliente1" Multiplicity="0..1" />
+          <End Type="FMirandaProgramacionNcapasModel.Venta" Role="Venta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente1">
+              <PropertyRef Name="IdCliente" />
+            </Principal>
+            <Dependent Role="Venta">
+              <PropertyRef Name="IdCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Departamento">
+          <Key>
+            <PropertyRef Name="IdDepartamento" />
+          </Key>
+          <Property Name="IdDepartamento" Nullable="false" annotation:StoreGeneratedPattern="Identity" Type="Int32" />
+          <Property Name="Nombre" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="IdArea" Type="Int32" />
+          <NavigationProperty Name="Area" Relationship="FMirandaProgramacionNcapasModel.FK_DepartamentoArea" FromRole="Departamento" ToRole="Area" />
+          <NavigationProperty Name="Productoes" Relationship="FMirandaProgramacionNcapasModel.FK__Producto__IdDepa__05D8E0BE" FromRole="Departamento" ToRole="Producto" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="principal_id" Nullable="false" Type="Int32" />
+          <Property Name="diagram_id" Nullable="false" annotation:StoreGeneratedPattern="Identity" Type="Int32" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" MaxLength="Max" FixedLength="false" Type="Binary" />
+        </EntityType>
+        <Association Name="FK_DepartamentoArea">
+          <End Type="FMirandaProgramacionNcapasModel.Area" Multiplicity="0..1" Role="Area" />
+          <End Type="FMirandaProgramacionNcapasModel.Departamento" Multiplicity="*" Role="Departamento" />
+          <ReferentialConstraint>
+            <Principal Role="Area">
+              <PropertyRef Name="IdArea" />
+            </Principal>
+            <Dependent Role="Departamento">
+              <PropertyRef Name="IdArea" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Producto__IdDepa__05D8E0BE">
+          <End Type="FMirandaProgramacionNcapasModel.Departamento" Multiplicity="0..1" Role="Departamento" />
+          <End Type="FMirandaProgramacionNcapasModel.Producto" Multiplicity="*" Role="Producto" />
+          <ReferentialConstraint>
+            <Principal Role="Departamento">
+              <PropertyRef Name="IdDepartamento" />
+            </Principal>
+            <Dependent Role="Producto">
+              <PropertyRef Name="IdDepartamento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="sp_helpdiagramdefinition_Result">
+          <Property Type="Int32" Name="version" Nullable="true" />
+          <Property Type="Binary" Name="definition" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagrams_Result">
+          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="AreaGetAll1_Result">
+          <Property Type="Int32" Name="IdArea" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="100" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="FMirandaProgramacionNcapasModelStoreContainer" CdmEntityContainer="FMirandaProgramacionNcapasEntities">
+        <EntityContainerMapping StorageEntityContainer="FMirandaProgramacionNcapasModelStoreContainer" CdmEntityContainer="FMirandaProgramacionNcapasEntities1">
           <EntitySetMapping Name="Areas">
             <EntityTypeMapping TypeName="FMirandaProgramacionNcapasModel.Area">
               <MappingFragment StoreEntitySet="Area">
-                <ScalarProperty Name="IdArea" ColumnName="IdArea" />
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Clientes">
-            <EntityTypeMapping TypeName="FMirandaProgramacionNcapasModel.Cliente">
-              <MappingFragment StoreEntitySet="Cliente">
-                <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
-                <ScalarProperty Name="NombreCliente" ColumnName="NombreCliente" />
-                <ScalarProperty Name="IdVenta" ColumnName="IdVenta" />
+                <ScalarProperty Name="IdArea" ColumnName="IdArea" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Colonias">
             <EntityTypeMapping TypeName="FMirandaProgramacionNcapasModel.Colonia">
               <MappingFragment StoreEntitySet="Colonia">
-                <ScalarProperty Name="IdColonia" ColumnName="IdColonia" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-                <ScalarProperty Name="CodigoPostal" ColumnName="CodigoPostal" />
                 <ScalarProperty Name="IdMunicipio" ColumnName="IdMunicipio" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Departamentoes">
-            <EntityTypeMapping TypeName="FMirandaProgramacionNcapasModel.Departamento">
-              <MappingFragment StoreEntitySet="Departamento">
-                <ScalarProperty Name="IdDepartamento" ColumnName="IdDepartamento" />
+                <ScalarProperty Name="CodigoPostal" ColumnName="CodigoPostal" />
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-                <ScalarProperty Name="IdArea" ColumnName="IdArea" />
+                <ScalarProperty Name="IdColonia" ColumnName="IdColonia" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Direccions">
             <EntityTypeMapping TypeName="FMirandaProgramacionNcapasModel.Direccion">
               <MappingFragment StoreEntitySet="Direccion">
-                <ScalarProperty Name="IdDireccion" ColumnName="IdDireccion" />
-                <ScalarProperty Name="NumeroInterior" ColumnName="NumeroInterior" />
-                <ScalarProperty Name="NumeroExterior" ColumnName="NumeroExterior" />
-                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
-                <ScalarProperty Name="IdColonia" ColumnName="IdColonia" />
                 <ScalarProperty Name="Calle" ColumnName="Calle" />
+                <ScalarProperty Name="IdColonia" ColumnName="IdColonia" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="NumeroExterior" ColumnName="NumeroExterior" />
+                <ScalarProperty Name="NumeroInterior" ColumnName="NumeroInterior" />
+                <ScalarProperty Name="IdDireccion" ColumnName="IdDireccion" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Estadoes">
             <EntityTypeMapping TypeName="FMirandaProgramacionNcapasModel.Estado">
               <MappingFragment StoreEntitySet="Estado">
-                <ScalarProperty Name="IdEstado" ColumnName="IdEstado" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
                 <ScalarProperty Name="IdPais" ColumnName="IdPais" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="IdEstado" ColumnName="IdEstado" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Municipios">
             <EntityTypeMapping TypeName="FMirandaProgramacionNcapasModel.Municipio">
               <MappingFragment StoreEntitySet="Municipio">
-                <ScalarProperty Name="IdMunicipio" ColumnName="IdMunicipio" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
                 <ScalarProperty Name="IdEstado" ColumnName="IdEstado" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="IdMunicipio" ColumnName="IdMunicipio" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Pais">
             <EntityTypeMapping TypeName="FMirandaProgramacionNcapasModel.Pai">
               <MappingFragment StoreEntitySet="Pais">
-                <ScalarProperty Name="IdPais" ColumnName="IdPais" />
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="IdPais" ColumnName="IdPais" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Productoes">
             <EntityTypeMapping TypeName="FMirandaProgramacionNcapasModel.Producto">
               <MappingFragment StoreEntitySet="Producto">
-                <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
-                <ScalarProperty Name="ProductoNombre" ColumnName="ProductoNombre" />
-                <ScalarProperty Name="PrecioUnitario" ColumnName="PrecioUnitario" />
-                <ScalarProperty Name="Stock" ColumnName="Stock" />
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-                <ScalarProperty Name="IdProvedor" ColumnName="IdProvedor" />
                 <ScalarProperty Name="IdDepartamento" ColumnName="IdDepartamento" />
+                <ScalarProperty Name="IdProvedor" ColumnName="IdProvedor" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Stock" ColumnName="Stock" />
+                <ScalarProperty Name="PrecioUnitario" ColumnName="PrecioUnitario" />
+                <ScalarProperty Name="ProductoNombre" ColumnName="ProductoNombre" />
+                <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Provedors">
             <EntityTypeMapping TypeName="FMirandaProgramacionNcapasModel.Provedor">
               <MappingFragment StoreEntitySet="Provedor">
-                <ScalarProperty Name="IdProvedor" ColumnName="IdProvedor" />
                 <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="IdProvedor" ColumnName="IdProvedor" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Rols">
             <EntityTypeMapping TypeName="FMirandaProgramacionNcapasModel.Rol">
               <MappingFragment StoreEntitySet="Rol">
-                <ScalarProperty Name="IdRol" ColumnName="IdRol" />
                 <ScalarProperty Name="RolNombre" ColumnName="RolNombre" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="FMirandaProgramacionNcapasModel.sysdiagram">
-              <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="IdRol" ColumnName="IdRol" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Usuarios">
             <EntityTypeMapping TypeName="FMirandaProgramacionNcapasModel.Usuario">
               <MappingFragment StoreEntitySet="Usuario">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="IdRol" ColumnName="IdRol" />
+                <ScalarProperty Name="ApellidoMaterno" ColumnName="ApellidoMaterno" />
+                <ScalarProperty Name="CURP" ColumnName="CURP" />
+                <ScalarProperty Name="Celular" ColumnName="Celular" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Genero" ColumnName="Genero" />
+                <ScalarProperty Name="FechadeNacimiento" ColumnName="FechadeNacimiento" />
+                <ScalarProperty Name="NombredeUsuario" ColumnName="NombredeUsuario" />
+                <ScalarProperty Name="ApellidoPaterno" ColumnName="ApellidoPaterno" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ventas">
+            <EntityTypeMapping TypeName="FMirandaProgramacionNcapasModel.Venta">
+              <MappingFragment StoreEntitySet="Venta">
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
+                <ScalarProperty Name="IdVenta" ColumnName="IdVenta" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VentaClientes">
+            <EntityTypeMapping TypeName="FMirandaProgramacionNcapasModel.VentaCliente">
+              <MappingFragment StoreEntitySet="VentaCliente">
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
+                <ScalarProperty Name="IdVenta" ColumnName="IdVenta" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VentaProductoes">
+            <EntityTypeMapping TypeName="FMirandaProgramacionNcapasModel.VentaProducto">
+              <MappingFragment StoreEntitySet="VentaProducto">
+                <ScalarProperty Name="ProductoNombre" ColumnName="ProductoNombre" />
+                <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="IdVentaProducto" ColumnName="IdVentaProducto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="ColoniaGetByIdMunicipio" FunctionName="FMirandaProgramacionNcapasModel.Store.ColoniaGetByIdMunicipio">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="FMirandaProgramacionNcapasModel.ColoniaGetByIdMunicipio_Result">
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="CodigoPostal" ColumnName="CodigoPostal" />
+                <ScalarProperty Name="IdMunicipio" ColumnName="IdMunicipio" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="DepartamentoAdd" FunctionName="FMirandaProgramacionNcapasModel.Store.DepartamentoAdd" />
+          <FunctionImportMapping FunctionImportName="DepartamentoDelete" FunctionName="FMirandaProgramacionNcapasModel.Store.DepartamentoDelete" />
+          <FunctionImportMapping FunctionImportName="DepartamentoGetAll" FunctionName="FMirandaProgramacionNcapasModel.Store.DepartamentoGetAll">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="FMirandaProgramacionNcapasModel.DepartamentoGetAll_Result">
+                <ScalarProperty Name="IdDepartamento" ColumnName="IdDepartamento" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="IdArea" ColumnName="IdArea" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="DepartamentoGetById" FunctionName="FMirandaProgramacionNcapasModel.Store.DepartamentoGetById">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="FMirandaProgramacionNcapasModel.DepartamentoGetById_Result">
+                <ScalarProperty Name="IdDepartamento" ColumnName="IdDepartamento" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="IdArea" ColumnName="IdArea" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="DepartamentoUpdate" FunctionName="FMirandaProgramacionNcapasModel.Store.DepartamentoUpdate" />
+          <FunctionImportMapping FunctionImportName="DireccionGetByIdColonia" FunctionName="FMirandaProgramacionNcapasModel.Store.DireccionGetByIdColonia">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="FMirandaProgramacionNcapasModel.DireccionGetByIdColonia_Result">
+                <ScalarProperty Name="IdDireccion" ColumnName="IdDireccion" />
+                <ScalarProperty Name="NumeroInterior" ColumnName="NumeroInterior" />
+                <ScalarProperty Name="NumeroExterior" ColumnName="NumeroExterior" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="Calle" ColumnName="Calle" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="EstadoGetByIdPais" FunctionName="FMirandaProgramacionNcapasModel.Store.EstadoGetByIdPais">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="FMirandaProgramacionNcapasModel.EstadoGetByIdPais_Result">
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="IdPais" ColumnName="IdPais" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="MunicipioGetByIdEstado" FunctionName="FMirandaProgramacionNcapasModel.Store.MunicipioGetByIdEstado">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="FMirandaProgramacionNcapasModel.MunicipioGetByIdEstado_Result">
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="IdEstado" ColumnName="IdEstado" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="PaisGetAll" FunctionName="FMirandaProgramacionNcapasModel.Store.PaisGetAll" />
+          <FunctionImportMapping FunctionImportName="PaisGetById" FunctionName="FMirandaProgramacionNcapasModel.Store.PaisGetById">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="FMirandaProgramacionNcapasModel.PaisGetById_Result">
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="IdPais" ColumnName="IdPais" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ProductoAdd" FunctionName="FMirandaProgramacionNcapasModel.Store.ProductoAdd" />
+          <FunctionImportMapping FunctionImportName="ProductoDelete" FunctionName="FMirandaProgramacionNcapasModel.Store.ProductoDelete" />
+          <FunctionImportMapping FunctionImportName="ProductoGetAll" FunctionName="FMirandaProgramacionNcapasModel.Store.ProductoGetAll">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="FMirandaProgramacionNcapasModel.ProductoGetAll_Result">
+                <ScalarProperty Name="ProductoNombre" ColumnName="ProductoNombre" />
+                <ScalarProperty Name="PrecioUnitario" ColumnName="PrecioUnitario" />
+                <ScalarProperty Name="Stock" ColumnName="Stock" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="IdDepartamento" ColumnName="IdDepartamento" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ProductoGetById" FunctionName="FMirandaProgramacionNcapasModel.Store.ProductoGetById">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="FMirandaProgramacionNcapasModel.ProductoGetById_Result">
+                <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
+                <ScalarProperty Name="ProductoNombre" ColumnName="ProductoNombre" />
+                <ScalarProperty Name="PrecioUnitario" ColumnName="PrecioUnitario" />
+                <ScalarProperty Name="Stock" ColumnName="Stock" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="IdProducto1" ColumnName="IdProducto1" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ProductoUpDate" FunctionName="FMirandaProgramacionNcapasModel.Store.ProductoUpDate" />
+          <FunctionImportMapping FunctionImportName="RolGetAll" FunctionName="FMirandaProgramacionNcapasModel.Store.RolGetAll" />
+          <FunctionImportMapping FunctionImportName="UsuarioAdd" FunctionName="FMirandaProgramacionNcapasModel.Store.UsuarioAdd" />
+          <FunctionImportMapping FunctionImportName="UsuarioDelete" FunctionName="FMirandaProgramacionNcapasModel.Store.UsuarioDelete" />
+          <FunctionImportMapping FunctionImportName="UsuarioGetAll" FunctionName="FMirandaProgramacionNcapasModel.Store.UsuarioGetAll">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="FMirandaProgramacionNcapasModel.UsuarioGetAll_Result">
                 <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
                 <ScalarProperty Name="ApellidoPaterno" ColumnName="ApellidoPaterno" />
@@ -1021,39 +1380,101 @@
                 <ScalarProperty Name="ApellidoMaterno" ColumnName="ApellidoMaterno" />
                 <ScalarProperty Name="IdRol" ColumnName="IdRol" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Ventas">
-            <EntityTypeMapping TypeName="FMirandaProgramacionNcapasModel.Venta">
-              <MappingFragment StoreEntitySet="Venta">
+                <ScalarProperty Name="RolNombre" ColumnName="RolNombre" />
+                <ScalarProperty Name="IdDireccion" ColumnName="IdDireccion" />
+                <ScalarProperty Name="IdColonia" ColumnName="IdColonia" />
+                <ScalarProperty Name="MunicipioNombre" ColumnName="MunicipioNombre" />
+                <ScalarProperty Name="IdMunicipio" ColumnName="IdMunicipio" />
+                <ScalarProperty Name="EstadoNombre" ColumnName="EstadoNombre" />
+                <ScalarProperty Name="IdEstado" ColumnName="IdEstado" />
+                <ScalarProperty Name="EstadoNombre1" ColumnName="EstadoNombre1" />
+                <ScalarProperty Name="IdPais" ColumnName="IdPais" />
+                <ScalarProperty Name="PaisNombre" ColumnName="PaisNombre" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UsuarioGetById" FunctionName="FMirandaProgramacionNcapasModel.Store.UsuarioGetById">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="FMirandaProgramacionNcapasModel.UsuarioGetById_Result">
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="ApellidoPaterno" ColumnName="ApellidoPaterno" />
+                <ScalarProperty Name="NombredeUsuario" ColumnName="NombredeUsuario" />
+                <ScalarProperty Name="FechadeNacimiento" ColumnName="FechadeNacimiento" />
+                <ScalarProperty Name="Genero" ColumnName="Genero" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="Celular" ColumnName="Celular" />
+                <ScalarProperty Name="CURP" ColumnName="CURP" />
+                <ScalarProperty Name="ApellidoMaterno" ColumnName="ApellidoMaterno" />
+                <ScalarProperty Name="IdRol" ColumnName="IdRol" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UsuarioUpdate" FunctionName="FMirandaProgramacionNcapasModel.Store.UsuarioUpdate" />
+          <EntitySetMapping Name="Cliente1">
+            <EntityTypeMapping TypeName="FMirandaProgramacionNcapasModel.Cliente1">
+              <MappingFragment StoreEntitySet="Cliente">
                 <ScalarProperty Name="IdVenta" ColumnName="IdVenta" />
+                <ScalarProperty Name="NombreCliente" ColumnName="NombreCliente" />
                 <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
-                <ScalarProperty Name="Total" ColumnName="Total" />
-                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="VentaClientes">
-            <EntityTypeMapping TypeName="FMirandaProgramacionNcapasModel.VentaCliente">
-              <MappingFragment StoreEntitySet="VentaCliente">
-                <ScalarProperty Name="IdVenta" ColumnName="IdVenta" />
-                <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
-                <ScalarProperty Name="Total" ColumnName="Total" />
-                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+          <EntitySetMapping Name="Departamentoes">
+            <EntityTypeMapping TypeName="FMirandaProgramacionNcapasModel.Departamento">
+              <MappingFragment StoreEntitySet="Departamento">
+                <ScalarProperty Name="IdArea" ColumnName="IdArea" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="IdDepartamento" ColumnName="IdDepartamento" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="VentaProductoes">
-            <EntityTypeMapping TypeName="FMirandaProgramacionNcapasModel.VentaProducto">
-              <MappingFragment StoreEntitySet="VentaProducto">
-                <ScalarProperty Name="IdVentaProducto" ColumnName="IdVentaProducto" />
-                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
-                <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
-                <ScalarProperty Name="ProductoNombre" ColumnName="ProductoNombre" />
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="FMirandaProgramacionNcapasModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="FMirandaProgramacionNcapasModel.Store.sp_alterdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="FMirandaProgramacionNcapasModel.Store.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="FMirandaProgramacionNcapasModel.Store.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="FMirandaProgramacionNcapasModel.Store.sp_helpdiagramdefinition">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="FMirandaProgramacionNcapasModel.sp_helpdiagramdefinition_Result">
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="FMirandaProgramacionNcapasModel.Store.sp_helpdiagrams">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="FMirandaProgramacionNcapasModel.sp_helpdiagrams_Result">
+                <ScalarProperty Name="Database" ColumnName="Database" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="FMirandaProgramacionNcapasModel.Store.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="FMirandaProgramacionNcapasModel.Store.sp_upgraddiagrams" />
+          <FunctionImportMapping FunctionImportName="AreaGetAll1" FunctionName="FMirandaProgramacionNcapasModel.Store.AreaGetAll">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="FMirandaProgramacionNcapasModel.AreaGetAll1_Result">
+                <ScalarProperty Name="IdArea" ColumnName="IdArea" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -1071,6 +1492,7 @@
         <DesignerProperty Name="EnablePluralization" Value="true" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
       </DesignerInfoPropertySet>
     </Options>
     <!-- Diagram content (shape and connector positions) -->

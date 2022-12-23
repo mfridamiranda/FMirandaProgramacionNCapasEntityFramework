@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 
 namespace BL
 {
+
+    //////////////////////////////////SqlClient////////////////////////////////
     public class Departamento
     {
         public static ML.Result GetAll()
@@ -287,6 +289,163 @@ namespace BL
             }
             return result;
         }
+
+        ////////////////////////Entity Framework/////////////////////////////
+        
+        public static ML.Result GetAllEF()
+        {
+            ML.Result result = new ML.Result();
+            try
+            {
+                using (DL_EF.FMirandaProgramacionNcapasEntities1 context = new DL_EF.FMirandaProgramacionNcapasEntities1())
+                {
+                    var query = context.DepartamentoGetAll().ToList();
+                    if (query != null)
+                    {
+                        result.Objects = new List<object>();
+                        foreach (var row in query)
+                        {
+                            ML.Departamento departamento = new ML.Departamento();
+
+                            departamento.IdDepartamento = row.IdDepartamento;
+                            departamento.Nombre = row.Nombre;
+
+                            departamento.Area = new ML.Area();
+                            departamento.Area.IdArea = row.IdArea.Value;
+                            departamento.Area.Nombre = row.Nombre; 
+                            result.Objects.Add(departamento);
+
+                        }
+                    }
+                }
+                result.Correct = true;
+            }
+            catch (Exception ex)
+            {
+                result.Correct = false;
+                result.ex = ex;
+                result.Message = "Ocurrio un error al mostrar los departamentos" + result.ex;
+                
+            }
+            return result;
+        }
+        public static ML.Result AddEF(ML.Departamento departamento)
+        {
+            ML.Result result = new ML.Result();
+            try
+            {
+                using (DL_EF.FMirandaProgramacionNcapasEntities1 context = new DL_EF.FMirandaProgramacionNcapasEntities1())
+                {
+                    int query = context.DepartamentoAdd(departamento.Nombre, departamento.Area.IdArea);
+                    if (query > 0)
+                    {
+                        result.Message = "Se agrego un Departamento correctamente";
+                    }
+                }
+                result.Correct = true;
+
+            }
+            catch (Exception ex)
+            {
+                result.Correct = true;
+                result.ex = ex;
+                result.Message = "No se agrego el departamento" + result.ex;
+
+            }
+            return (result);
+        }
+
+        public static ML.Result GetByIdEF(int IdDepartamento)
+        {
+            ML.Result result = new ML.Result();
+            try
+            {
+                using (DL_EF.FMirandaProgramacionNcapasEntities1 context = new DL_EF.FMirandaProgramacionNcapasEntities1())
+                {
+                    var query = context.DepartamentoGetById(IdDepartamento).SingleOrDefault();
+                    if (query != null)
+                    {
+                        ML.Departamento departamento = new ML.Departamento();
+
+                        departamento.IdDepartamento = query.IdDepartamento;
+                        departamento.Nombre = query.Nombre;
+
+                        departamento.Area = new ML.Area();
+                        departamento.Area.IdArea = query.IdArea.Value;
+                        result.Object = departamento;
+
+
+
+                    }
+                }
+                result.Correct = true;
+
+            }
+            catch (Exception ex)
+            {
+                result.Correct = false;
+                result.ex = ex;
+                result.Message = "No se puede mostrar el usuario seleccionado" + result.ex;
+            }
+            return result;
+        }
+
+        public static ML.Result UpdateEF(ML.Departamento departamento)
+        {
+            ML.Result result = new ML.Result();
+            try
+            {
+                using (DL_EF.FMirandaProgramacionNcapasEntities1 context = new DL_EF.FMirandaProgramacionNcapasEntities1())
+                {
+                    var query = context.DepartamentoUpdate(departamento.IdDepartamento, departamento.Nombre, departamento.Area.IdArea);
+                    if (query > 0)
+                    {
+                        result.Message = "Se actualizo el departamento correctamente";
+                    }
+                }
+                result.Correct = true;
+
+            }
+            catch (Exception ex)
+            {
+                result.Correct = false;
+                result.ex = ex;
+                result.Message = "No se pudo actualizar el departamento" + result.ex;
+            }
+            return result;
+
+
+
+        }
+        public static ML.Result DeleteEF(ML.Departamento departamento)
+        {
+            ML.Result result = new ML.Result();
+            try
+            {
+                using (DL_EF.FMirandaProgramacionNcapasEntities1 context = new DL_EF.FMirandaProgramacionNcapasEntities1())
+                {
+                    int query = context.DepartamentoDelete(departamento.IdDepartamento);
+                    if (query >= 1)
+                    {
+                        result.Correct = true;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                result.Correct = false;
+                result.ex = ex;
+                result.Message = "No se pudo eliminar el departamento" + result.ex;
+
+            }
+            return (result);
+
+
+        }
+
+
+
+
 
 
     }

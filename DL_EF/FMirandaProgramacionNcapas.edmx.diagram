@@ -4,35 +4,35 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="3e297f6009ee4319b22078f00a8d292f" Name="Diagram1">
-        <EntityTypeShape EntityType="FMirandaProgramacionNcapasModel.Area" Width="1.5" PointX="0.75" PointY="1.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="FMirandaProgramacionNcapasModel.Cliente" Width="1.5" PointX="10.75" PointY="11.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="FMirandaProgramacionNcapasModel.Colonia" Width="1.5" PointX="8" PointY="10" IsExpanded="true" />
-        <EntityTypeShape EntityType="FMirandaProgramacionNcapasModel.Departamento" Width="1.5" PointX="3" PointY="1.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="FMirandaProgramacionNcapasModel.Direccion" Width="1.5" PointX="10.25" PointY="5.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="FMirandaProgramacionNcapasModel.Estado" Width="1.5" PointX="3.5" PointY="10.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="FMirandaProgramacionNcapasModel.Municipio" Width="1.5" PointX="5.75" PointY="10.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="FMirandaProgramacionNcapasModel.Pai" Width="1.5" PointX="1.25" PointY="10.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="FMirandaProgramacionNcapasModel.Producto" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="FMirandaProgramacionNcapasModel.Provedor" Width="1.5" PointX="3" PointY="5.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="FMirandaProgramacionNcapasModel.Rol" Width="1.5" PointX="5.75" PointY="6.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="FMirandaProgramacionNcapasModel.sysdiagram" Width="1.5" PointX="9.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="FMirandaProgramacionNcapasModel.Usuario" Width="1.5" PointX="8" PointY="5" IsExpanded="true" />
-        <EntityTypeShape EntityType="FMirandaProgramacionNcapasModel.Venta" Width="1.5" PointX="13" PointY="10" IsExpanded="true" />
-        <EntityTypeShape EntityType="FMirandaProgramacionNcapasModel.VentaCliente" Width="1.5" PointX="13" PointY="12.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="FMirandaProgramacionNcapasModel.VentaProducto" Width="1.5" PointX="7.5" PointY="1.5" IsExpanded="true" />
-        <AssociationConnector Association="FMirandaProgramacionNcapasModel.FK_DepartamentoArea" ManuallyRouted="false" />
-        <AssociationConnector Association="FMirandaProgramacionNcapasModel.FK__Venta__IdCliente__1AD3FDA4" ManuallyRouted="false" />
-        <AssociationConnector Association="FMirandaProgramacionNcapasModel.FK__Venta__IdCliente__1DB06A4F" ManuallyRouted="false" />
-        <AssociationConnector Association="FMirandaProgramacionNcapasModel.FK__Colonia__IdMunic__4D94879B" ManuallyRouted="false" />
-        <AssociationConnector Association="FMirandaProgramacionNcapasModel.FK_Colonia" ManuallyRouted="false" />
-        <AssociationConnector Association="FMirandaProgramacionNcapasModel.FK__Producto__IdDepa__05D8E0BE" ManuallyRouted="false" />
-        <AssociationConnector Association="FMirandaProgramacionNcapasModel.FK_Usuario" ManuallyRouted="false" />
-        <AssociationConnector Association="FMirandaProgramacionNcapasModel.FK__Estado__IdPais__4F7CD00D" ManuallyRouted="false" />
-        <AssociationConnector Association="FMirandaProgramacionNcapasModel.FK__Municipio__IdEst__4E88ABD4" ManuallyRouted="false" />
-        <AssociationConnector Association="FMirandaProgramacionNcapasModel.FK__Producto__IdProv__04E4BC85" ManuallyRouted="false" />
-        <AssociationConnector Association="FMirandaProgramacionNcapasModel.FK__VentaProd__IdPro__160F4887" ManuallyRouted="false" />
-        <AssociationConnector Association="FMirandaProgramacionNcapasModel.FK__Usuario__IdRol__286302EC" ManuallyRouted="false" />
+      <Diagram DiagramId="ce8a0b0ae21c45729f6d23f276e4babf" Name="Diagram1">
+        <EntityTypeShape EntityType="FMirandaProgramacionNcapasModel.Area" Width="1.5" PointX="0.75" PointY="5.625" />
+        <EntityTypeShape EntityType="FMirandaProgramacionNcapasModel.Colonia" Width="1.5" PointX="12" PointY="14" />
+        <EntityTypeShape EntityType="FMirandaProgramacionNcapasModel.Direccion" Width="1.5" PointX="14.25" PointY="1.75" />
+        <EntityTypeShape EntityType="FMirandaProgramacionNcapasModel.Estado" Width="1.5" PointX="7.5" PointY="14.125" />
+        <EntityTypeShape EntityType="FMirandaProgramacionNcapasModel.Municipio" Width="1.5" PointX="9.75" PointY="14.125" />
+        <EntityTypeShape EntityType="FMirandaProgramacionNcapasModel.Pai" Width="1.5" PointX="5.25" PointY="14.25" />
+        <EntityTypeShape EntityType="FMirandaProgramacionNcapasModel.Producto" Width="1.5" PointX="5.25" PointY="5" />
+        <EntityTypeShape EntityType="FMirandaProgramacionNcapasModel.Provedor" Width="1.5" PointX="3" PointY="8.625" />
+        <EntityTypeShape EntityType="FMirandaProgramacionNcapasModel.Rol" Width="1.5" PointX="9.75" PointY="2.25" />
+        <EntityTypeShape EntityType="FMirandaProgramacionNcapasModel.Usuario" Width="1.5" PointX="12" PointY="1" />
+        <EntityTypeShape EntityType="FMirandaProgramacionNcapasModel.Venta" Width="1.5" PointX="16" PointY="7" />
+        <EntityTypeShape EntityType="FMirandaProgramacionNcapasModel.VentaCliente" Width="1.5" PointX="16" PointY="9.75" />
+        <EntityTypeShape EntityType="FMirandaProgramacionNcapasModel.VentaProducto" Width="1.5" PointX="7.5" PointY="5.5" />
+        <AssociationConnector Association="FMirandaProgramacionNcapasModel.FK__Colonia__IdMunic__4D94879B" />
+        <AssociationConnector Association="FMirandaProgramacionNcapasModel.FK_Colonia" />
+        <AssociationConnector Association="FMirandaProgramacionNcapasModel.FK_Usuario" />
+        <AssociationConnector Association="FMirandaProgramacionNcapasModel.FK__Estado__IdPais__4F7CD00D" />
+        <AssociationConnector Association="FMirandaProgramacionNcapasModel.FK__Municipio__IdEst__4E88ABD4" />
+        <AssociationConnector Association="FMirandaProgramacionNcapasModel.FK__Producto__IdProv__04E4BC85" />
+        <AssociationConnector Association="FMirandaProgramacionNcapasModel.FK__VentaProd__IdPro__160F4887" />
+        <AssociationConnector Association="FMirandaProgramacionNcapasModel.FK__Usuario__IdRol__286302EC" />
+        <EntityTypeShape EntityType="FMirandaProgramacionNcapasModel.Cliente1" Width="1.5" PointX="11.75" PointY="8.25" />
+        <AssociationConnector Association="FMirandaProgramacionNcapasModel.FK__Venta__IdCliente__1AD3FDA4" />
+        <AssociationConnector Association="FMirandaProgramacionNcapasModel.FK__Venta__IdCliente__1DB06A4F" />
+        <EntityTypeShape EntityType="FMirandaProgramacionNcapasModel.Departamento" PointX="3.375" PointY="5.375" Width="1.5" />
+        <EntityTypeShape EntityType="FMirandaProgramacionNcapasModel.sysdiagram" PointX="0.75" PointY="0.75" Width="1.5" />
+        <AssociationConnector Association="FMirandaProgramacionNcapasModel.FK_DepartamentoArea" />
+        <AssociationConnector Association="FMirandaProgramacionNcapasModel.FK__Producto__IdDepa__05D8E0BE" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

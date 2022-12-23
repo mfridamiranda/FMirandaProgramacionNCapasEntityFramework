@@ -50,9 +50,9 @@
 
                             @Html.LabelFor(model => model.Area.IdArea)
 
-                            @Html.TextBoxFor(model => model.Area.IdArea, new { @class = "form-control" })
+                            @*@Html.TextBoxFor(model => model.Area.IdArea, new { @class = "form-control" })*@
 
-                            
+                            @Html.DropDownListFor( model => model.Area.IdArea, new SelectList(Model.Area.Areas, "IdArea","Nombre"), "Selecciona un area", new {@class = "form-control"} )
                             @Html.ValidationMessageFor(model => model.Area.IdArea)
 
 
