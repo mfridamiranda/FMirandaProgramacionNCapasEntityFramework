@@ -27,8 +27,8 @@
                     <th>Editar</th>
                     <th class="hidden">IdDepartamento</th>
                     <th>Nombre</th>
-                    @*<th class="hidden">IdArea</th>
-                    <th>Nombre</th>*@
+                    <th class="hidden">IdArea</th>
+                    <th>Nombre</th>
                     <th>Eliminar</th>
 
                 </tr>
@@ -40,8 +40,8 @@
                         <td class="text-center"><a class="btn btn-warning glyphicon glyphicon-edit" href="@Url.Action("Form", "Departamento", new { IdDepartamento = departamento.IdDepartamento})"></a></td>
                         <td class="hidden">@departamento.IdDepartamento</td>
                         <td>@departamento.Nombre  </td>
-                        @*<td> @departamento.Area.IdArea </td>
-                        <td> @departamento.Area.Nombre </td>*@
+                        <td> @departamento.Area.IdArea </td>
+                        <td> @departamento.Area.Nombre </td>
 
                         <td class="hidden">@departamento.Area.IdArea</td>
                         <td >@departamento.Area.Nombre</td>

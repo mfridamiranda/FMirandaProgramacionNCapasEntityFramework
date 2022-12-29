@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DL_EF;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -355,7 +356,7 @@ namespace BL
             return (result);
         }
 
-        public static ML.Result GetByIdEF(int IdDepartamento)
+        public static ML.Result GetByIdEF(int IdDepartamento)  //GUIA PARA GET BY IDLINQ
         {
             ML.Result result = new ML.Result();
             try
@@ -442,6 +443,223 @@ namespace BL
 
 
         }
+
+        /////////////////////////// LINQ ///////////////////////////////////////////////////////
+        
+
+        public static ML.Result GetAllLINQ()
+        {
+            ML.Result result = new ML.Result();
+            try
+            {
+                using (DL_EF.FMirandaProgramacionNcapasEntities1 context = new DL_EF.FMirandaProgramacionNcapasEntities1())
+                {
+                    var query = (from departamentoLINQ in context.Departamentoes
+                                 select new
+                                 {
+                                     IdDepartamento = departamentoLINQ.IdDepartamento,
+                                     Nombre = departamentoLINQ.Nombre,
+                                     IdArea = departamentoLINQ.IdArea
+                                 }
+
+                                 );
+                    if (query != null &&  query.ToList().Count > 0)
+                    {
+                        result.Objects = new List<object>();
+
+                        foreach (var row in query)
+                        {
+                            ML.Departamento departamneto = new ML.Departamento();
+
+                            departamneto.IdDepartamento = row.IdDepartamento;
+                            departamneto.Nombre = row.Nombre;
+                            departamneto.Area = new ML.Area();
+                            departamneto.Area.IdArea = row.IdArea.Value;
+
+                            result.Objects.Add(departamneto);
+           
+
+                        }
+                        result.Correct = true;
+
+                    }
+                    else
+                    {
+                        result.Correct = false;
+                        result.Message = "No se pudo mostrar los departamentos. ";
+                    }
+
+                }
+                
+
+                    
+                
+                    
+            }
+            catch (Exception ex)
+            {
+                result.Correct = false;
+                result.Message = ex.Message;
+            }
+            return result;
+        }
+
+     
+
+        public static ML.Result AddLINQ(ML.Departamento departamento)
+        {
+            ML.Result result = new ML.Result();
+            try
+            {
+                using (DL_EF.FMirandaProgramacionNcapasEntities1 context = new DL_EF.FMirandaProgramacionNcapasEntities1())
+                {
+                    DL_EF.Departamento departamentoLINQ = new DL_EF.Departamento();
+
+                    departamentoLINQ.IdDepartamento = departamento.IdDepartamento;
+                    departamentoLINQ.Nombre = departamento.Nombre;
+
+                    //tabla rol
+                    departamentoLINQ.IdArea = departamento.Area.IdArea;
+
+                    context.Departamentoes.Add(departamentoLINQ);
+                    context.SaveChanges();
+
+                }
+                result.Correct = true;
+            }
+            catch (Exception ex)
+            {
+                result.Correct = false;
+                result.ex = ex;
+                result.Message = "No se pudo agregar el departamento. " + result.ex;
+
+                throw;
+            }
+            return result;
+        }
+
+        public static ML.Result GetByIdLINQ(int idDepartamento)
+        {
+            ML.Result result = new ML.Result();
+            try
+            {
+                using (DL_EF.FMirandaProgramacionNcapasEntities1 context = new DL_EF.FMirandaProgramacionNcapasEntities1())
+                {
+
+
+                    var query = (from departamentoLINQ in context.Departamentoes
+                                 where departamentoLINQ.IdDepartamento == idDepartamento
+                                 select new
+                                 {
+                                     IdDepartamento = departamentoLINQ.IdDepartamento,
+                                     Nombre = departamentoLINQ.Nombre,
+                                     IdArea = departamentoLINQ.IdArea
+
+                                 }); //GETBYID 
+
+                    /* result.Objects = new List<object>(); */ //NO
+                    var row = context.DepartamentoGetById(idDepartamento).SingleOrDefault();
+                    if (query != null)
+                        if (query != null )
+                    {
+                        //foreach (var row in query) //NO
+                        //{
+                            ML.Departamento departamento = new ML.Departamento();
+
+                            departamento.IdDepartamento = row.IdDepartamento;
+                            departamento.Nombre = row.Nombre;
+
+                            departamento.Area = new ML.Area();
+                            departamento.Area.IdArea = row.IdArea.Value;
+
+                            departamento.Area.Areas = new List<object>();
+
+                            //result.Objects.Add(departamento); //NO
+                            result.Object = departamento;
+                            
+                      
+                        result.Correct = true;
+                    }
+                    else
+                    {
+                        result.Correct = false;
+                        result.Message = "No se pudo mostrar el usuario.";
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                result.Correct = false;
+                result.Message = ex.Message;
+            }
+            return result;
+        }
+
+        public static ML.Result UpdateLINQ(ML.Departamento departamento)
+        {
+            ML.Result result = new ML.Result();
+
+            try
+            {
+                using (DL_EF.FMirandaProgramacionNcapasEntities1 context = new DL_EF.FMirandaProgramacionNcapasEntities1())
+                {
+                    var query = (from departamentoLINQ in context.Departamentoes
+                                 where departamentoLINQ.IdDepartamento == departamento.IdDepartamento
+                                 select departamentoLINQ).SingleOrDefault();
+                    if (query != null)
+                    {
+                        query.Nombre = departamento.Nombre;
+                        query.IdArea = departamento.Area.IdArea;
+
+                        context.SaveChanges();
+                        result.Correct = true;
+
+                    }
+                    else
+                    {
+                        result.Correct = false;
+
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                result.Correct = false;
+                result.ex = ex;
+                result.Message = "No se pudo actualizar al departamento." + result.ex;
+
+                throw;
+            }
+            return result;
+        }
+
+        public static ML.Result DeleteLINQ(ML.Departamento departamento)
+        {
+            ML.Result result = new ML.Result();
+
+            try
+            {
+                using (DL_EF.FMirandaProgramacionNcapasEntities1 context = new DL_EF.FMirandaProgramacionNcapasEntities1())
+                {
+                    var query = (from departamentoLINQ in context.Departamentoes
+                                 where departamentoLINQ.IdDepartamento == departamento.IdDepartamento
+                                 select departamentoLINQ).First();
+
+                    context.Departamentoes.Remove(query);
+                    context.SaveChanges();
+                    result.Correct=true;
+                }
+            }
+            catch (Exception ex)
+            {
+                result.Correct = false;
+                result.ex = ex;
+                result.Message = "No se pudo eliminar el departamento" + result.ex;
+            }
+            return result;
+        }
+
 
 
 

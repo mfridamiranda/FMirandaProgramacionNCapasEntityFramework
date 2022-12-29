@@ -13,7 +13,8 @@ namespace PL.Controllers
         {
             //ML.Result result = BL.Departamento.GetAll(); //se invoca al metodo de GetAll en la capa BL SqlClient
             ML.Area area = new ML.Area();
-            ML.Result result = BL.Departamento.GetAllEF(); //se invoca al metodo de GetAll en la capa BL Entity
+           /* ML.Result result = BL.Departamento.GetAllEF();*/ //se invoca al metodo de GetAll en la capa BL Entity
+            ML.Result result = BL.Departamento.GetAllLINQ();//se invoca a la capa de GetAll en la capa BL LINQ
 
             ML.Departamento departamento = new ML.Departamento(); //instancia de mi objeto departamento
             
@@ -58,13 +59,16 @@ namespace PL.Controllers
 
                 //GetById
                 /*ML.Result result = BL.Departamento.GetById(IdDepartamento.Value);*///se invoca al metodo de GetById en la capa BL SqlClient
-                ML.Result result = BL.Departamento.GetByIdEF(IdDepartamento.Value);//se invoca al metodo de GetById en la capa BL Entity Framework
-                //ML.Departamento departamento = new ML.Departamento();
+                /*ML.Result result = BL.Departamento.GetByIdEF(IdDepartamento.Value);*///se invoca al metodo de GetById en la capa BL Entity Framework
+                ML.Result result = BL.Departamento.GetByIdLINQ(IdDepartamento.Value);//se invoca al metodo de GetById en la capa BL LINQ
+
+                
+                //departamento.Area = new ML.Area();
                 if (result.Correct)
                 {
                     departamento = (ML.Departamento)result.Object;
 
-                    departamento.Area.Areas = resultArea.Objects.ToList();
+                    departamento.Area.Areas = resultArea.Objects;
                 }
                 else
                 {
@@ -88,7 +92,7 @@ namespace PL.Controllers
             {
 
                 /*ML.Result result = BL.Departamento.Add(departamento);*///se invoca al metodo de GetById en la capa BL SqlClient
-                ML.Result result = BL.Departamento.AddEF(departamento);//se invoca al metodo de GetById en la capa BL Entity Framework
+                ML.Result result = BL.Departamento.AddLINQ(departamento);//se invoca al metodo de GetById en la capa BL Entity Framework
 
                 if (result.Correct)
                 {
@@ -103,7 +107,9 @@ namespace PL.Controllers
             else
             {
                 /*ML.Result result = BL.Departamento.Update(departamento);*///se invoca al metodo de GetById en la capa BL SqlClient
-                ML.Result result = BL.Departamento.UpdateEF(departamento);//se invoca al metodo de GetById en la capa BL Entity Framework
+                /*ML.Result result = BL.Departamento.UpdateEF(departamento);*///se invoca al metodo de GetById en la capa BL Entity Framework
+                ML.Result result = BL.Departamento.UpdateLINQ(departamento);//se invoca al metodo de GetById en la capa BL Entity Framework
+
 
                 if (result.Correct)
                 {
@@ -124,7 +130,8 @@ namespace PL.Controllers
         public ActionResult Delete(ML.Departamento departamento)
         {
             //ML.Result result = BL.Departamento.Delete(departamento);/ se invoca al metodo de GetById en la capa BL SqlClient
-            ML.Result result = BL.Departamento.DeleteEF(departamento);//se invoca al metodo de GetById en la capa BL Entity Framework
+            /*ML.Result result = BL.Departamento.DeleteEF(departamento);*///se invoca al metodo de GetById en la capa BL Entity Framework
+            ML.Result result = BL.Departamento.DeleteLINQ(departamento);//se invoca al metodo de GetById en la capa BL LINQ
 
             if (departamento != null)
             {

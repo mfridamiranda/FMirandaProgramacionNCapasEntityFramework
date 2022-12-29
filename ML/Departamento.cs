@@ -12,8 +12,9 @@ namespace ML
         public int IdDepartamento { get; set; }
         public string Nombre { get; set; }
 
-        //public int IdArea { get; set; }
         public List<object> Departamentos { get; set; }
+
+        public List<object> Departamentoes { get; set; }
 
         public ML.Area Area { get; set; } //  declarada como una propiedad
 
