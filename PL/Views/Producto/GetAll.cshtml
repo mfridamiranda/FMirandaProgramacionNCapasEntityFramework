@@ -6,42 +6,114 @@
 
 
 
-    <h2>Producto</h2>
+<h2>Producto</h2>
 
 
-    <div class="row">
-        <div class="col-md-12">
-            <h5>Seleccione un producto para agregarlo al carrito</h5>
-            <hr />
-        </div>
+<div class="row">
+    <div class="col-md-12">
+        <h5>Seleccione un producto para agregarlo al carrito</h5>
+        <hr />
     </div>
+</div>
 
-    <div class="row">
+<div class="row">
 
-        @foreach (ML.Producto producto in Model.Productos)
-        {
+    @foreach (ML.Producto producto in Model.Productos)
+    {
+        <div class="row">
+            <div class="col-md-2">&nbsp;</div>
+            <div class="col-md-8">
+                <div class="row space-16">&nbsp;</div>
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="thumbnail">
+                            <div class="caption text-center" onclick="location.href='https://flow.microsoft.com/en-us/connectors/shared_slack/slack/'">
+                                <div class="position-relative">
+                                    <img src="https://az818438.vo.msecnd.net/icons/slack.png" style="width:72px;height:72px;" />
+                                </div>
 
-            
-            <div class="card" style="width: 18rem;">
-                <img class="card-img-top" src=".../100px180/" alt="Card image cap"> @*//revisar*@ 
-                <div class="card-body">
-                    <h5 class="card-title">@producto.ProductoNombre</h5>
-                    <p class="card-text">"IdProducto" @producto.ProductoNombre</p>
-                    <p class="card-text">"PrecioUnitario:" @producto.PrecioUnitario</p>
-                    <p class="card-text">"Stock"@producto.Stock</p>
-                    <p class="card-text">"Descripcion" @producto.Descipcion</p>
-                    <p class="card-text" id="pIdDepartamento"> @producto.Departamento.IdDepartamento</p>
-                    <a href="#" class="btn btn-primary">Agregar al carrito</a>
+                                @*Titulo*@<h4 id="thumbnail-label"><a href="@producto.ProductoNombre" target="_blank">@producto.ProductoNombre</a></h4>
+
+                                @*Datos*@<div class="thumbnail-description smaller">@producto.Descipcion</div>
+                                @*Datos*@<div class="thumbnail-description smaller">@producto.PrecioUnitario</div>
+                            </div>
+                            <div class="caption card-footer text-center">  @*Boton*@
+                                <ul class="list-inline">
+                                    <li><i class="people lighter"></i>@producto.Departamento.IdDepartamento</li>
+                                    <li></li>
+                                    @*<li><i class="glyphicon glyphicon-envelope lighter"></i><a href="#">&nbsp;Agregar</a></li>*@
+                                    <li><i class="glyphicon glyphicon-shopping-cart"></i><a href="#">&nbsp;Agregar</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+                <div class="col-md-2">&nbsp;</div>
             </div>
-
-        }
-
-
-    </div>
-  
+        </div>
 
 
+        @*<div class="col mt-3 pt-3">
 
- 
+
+                <div class="card text-white bg-dark border-success mb-3 border-4  " style="width: 18rem; ">
+                    <img src="img_avatar1.png" class="card-img-top" style=" height: 50%; width: 100%; ">
+                    <div class="card-body ">
+                        <h5 class="card-title card-header text-center bg-secondary" id="pNombre">@producto.ProductoNombre</h5>
+                        <p class="card-text" id="Creditos">IdProducto: @producto.IdProducto</p>
+                        <p class="card-text" id="PrecioUnitario">Precio:  @producto.PrecioUnitario</p>
+                        <p class="card-text" id="Descripcion">Descripcion: @producto.Descipcion</p>
+                        <p class="card-text" id="IdDepartamento">Departamneto: @producto.Departamento.IdDepartamento</p>
+
+
+                        <a href="@Url.Action("CartPost", "Producto", new { IdProducto = producto. IdProducto, ProductoNombre = producto. ProductoNombre, PrecioUnitario = producto.PrecioUnitario, Descripcion = producto.Descipcion})" class="btn btn-success">Agregar <i class="bi bi-cart3" style="color: khaki"></i> </a>
+
+                    </div>
+                </div>
+
+
+            </div>*@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    }
+
+
+</div>
+
+<style>
+    .thumbnail {
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5);
+        transition: 0.3s;
+        min-width: 40%;
+        border-radius: 5px;
+    }
+
+    .thumbnail-description {
+        min-height: 40px;
+    }
+
+    .thumbnail:hover {
+        cursor: pointer;
+        box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 1);
+    }
+</style>
+
+
+
+
+
 
