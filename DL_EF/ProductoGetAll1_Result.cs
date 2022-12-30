@@ -11,10 +11,9 @@ namespace DL_EF
 {
     using System;
     
-    public partial class ProductoGetAll_Result
+    public partial class ProductoGetAll1_Result
     {
-        public int IdProducto;
-
+        public int IdProducto { get; set; }
         public string ProductoNombre { get; set; }
         public decimal PrecioUnitario { get; set; }
         public int Stock { get; set; }

@@ -522,5 +522,10 @@ namespace DL_EF
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<AreaGetAll1_Result>("AreaGetAll1");
         }
+    
+        public virtual ObjectResult<ProductoGetAll1_Result> ProductoGetAll1()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ProductoGetAll1_Result>("ProductoGetAll1");
+        }
     }
 }

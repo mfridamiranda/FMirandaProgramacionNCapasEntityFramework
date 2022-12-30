@@ -1,0 +1,47 @@
+﻿@model ML.Producto
+@{
+    ViewBag.Title = "GetAll";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+    <h2>Producto</h2>
+
+
+    <div class="row">
+        <div class="col-md-12">
+            <h5>Seleccione un producto para agregarlo al carrito</h5>
+            <hr />
+        </div>
+    </div>
+
+    <div class="row">
+
+        @foreach (ML.Producto producto in Model.Productos)
+        {
+
+            
+            <div class="card" style="width: 18rem;">
+                <img class="card-img-top" src=".../100px180/" alt="Card image cap"> @*//revisar*@ 
+                <div class="card-body">
+                    <h5 class="card-title">@producto.ProductoNombre</h5>
+                    <p class="card-text">"IdProducto" @producto.ProductoNombre</p>
+                    <p class="card-text">"PrecioUnitario:" @producto.PrecioUnitario</p>
+                    <p class="card-text">"Stock"@producto.Stock</p>
+                    <p class="card-text">"Descripcion" @producto.Descipcion</p>
+                    <p class="card-text" id="pIdDepartamento"> @producto.Departamento.IdDepartamento</p>
+                    <a href="#" class="btn btn-primary">Agregar al carrito</a>
+                </div>
+            </div>
+
+        }
+
+
+    </div>
+  
+
+
+
+ 
+

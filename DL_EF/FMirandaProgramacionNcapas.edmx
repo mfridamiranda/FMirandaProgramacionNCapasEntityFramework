@@ -704,6 +704,7 @@
           <FunctionImport Name="sp_upgraddiagrams" />
           <FunctionImport Name="AreaGetAll" ReturnType="Collection(String)" />
           <FunctionImport Name="AreaGetAll1" ReturnType="Collection(FMirandaProgramacionNcapasModel.AreaGetAll1_Result)" />
+          <FunctionImport Name="ProductoGetAll1" ReturnType="Collection(FMirandaProgramacionNcapasModel.ProductoGetAll1_Result)" />
         </EntityContainer>
         <EntityType Name="Area">
           <Key>
@@ -1127,6 +1128,14 @@
           <Property Type="Int32" Name="IdArea" Nullable="false" />
           <Property Type="String" Name="Nombre" Nullable="false" MaxLength="100" />
         </ComplexType>
+        <ComplexType Name="ProductoGetAll1_Result">
+          <Property Type="Int32" Name="IdProducto" Nullable="false" />
+          <Property Type="String" Name="ProductoNombre" Nullable="false" MaxLength="200" />
+          <Property Type="Decimal" Name="PrecioUnitario" Nullable="false" Precision="18" Scale="2" />
+          <Property Type="Int32" Name="Stock" Nullable="false" />
+          <Property Type="String" Name="Descripcion" Nullable="true" MaxLength="500" />
+          <Property Type="Int32" Name="IdDepartamento" Nullable="true" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1336,17 +1345,6 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="ProductoAdd" FunctionName="FMirandaProgramacionNcapasModel.Store.ProductoAdd" />
           <FunctionImportMapping FunctionImportName="ProductoDelete" FunctionName="FMirandaProgramacionNcapasModel.Store.ProductoDelete" />
-          <FunctionImportMapping FunctionImportName="ProductoGetAll" FunctionName="FMirandaProgramacionNcapasModel.Store.ProductoGetAll">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="FMirandaProgramacionNcapasModel.ProductoGetAll_Result">
-                <ScalarProperty Name="ProductoNombre" ColumnName="ProductoNombre" />
-                <ScalarProperty Name="PrecioUnitario" ColumnName="PrecioUnitario" />
-                <ScalarProperty Name="Stock" ColumnName="Stock" />
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-                <ScalarProperty Name="IdDepartamento" ColumnName="IdDepartamento" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="ProductoGetById" FunctionName="FMirandaProgramacionNcapasModel.Store.ProductoGetById">
             <ResultMapping>
               <ComplexTypeMapping TypeName="FMirandaProgramacionNcapasModel.ProductoGetById_Result">
@@ -1472,6 +1470,18 @@
               <ComplexTypeMapping TypeName="FMirandaProgramacionNcapasModel.AreaGetAll1_Result">
                 <ScalarProperty Name="IdArea" ColumnName="IdArea" />
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ProductoGetAll1" FunctionName="FMirandaProgramacionNcapasModel.Store.ProductoGetAll">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="FMirandaProgramacionNcapasModel.ProductoGetAll1_Result">
+                <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
+                <ScalarProperty Name="ProductoNombre" ColumnName="ProductoNombre" />
+                <ScalarProperty Name="PrecioUnitario" ColumnName="PrecioUnitario" />
+                <ScalarProperty Name="Stock" ColumnName="Stock" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="IdDepartamento" ColumnName="IdDepartamento" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

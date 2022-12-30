@@ -116,6 +116,9 @@
     <Compile Include="Producto.cs">
       <DependentUpon>FMirandaProgramacionNCapas.tt</DependentUpon>
     </Compile>
+    <Compile Include="ProductoGetAll1_Result.cs">
+      <DependentUpon>FMirandaProgramacionNCapas.tt</DependentUpon>
+    </Compile>
     <Compile Include="ProductoGetAll_Result.cs">
       <DependentUpon>FMirandaProgramacionNCapas.tt</DependentUpon>
     </Compile>
