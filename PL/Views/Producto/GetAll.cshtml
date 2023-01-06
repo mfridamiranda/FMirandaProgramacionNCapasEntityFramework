@@ -1,25 +1,58 @@
 ﻿@model ML.Producto
+
 @{
-    ViewBag.Title = "GetAll";
+    ViewBag.Title = "VentaProducto";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 
 
-<h2>Producto</h2>
+<h2>Venta de Productos Disponibles</h2>
 
 
-<div class="row">
-    <div class="col-md-12">
-        <h5>Seleccione un producto para agregarlo al carrito</h5>
-        <hr />
+<div class="container">
+    <h3 class="text-black"> Venta Producto  </h3>
+    <div class="row">
+        <div class="col-md-12">
+            <h5>Seleccione un producto para agregarlo al carrito</h5>
+            <hr />
+        </div>
     </div>
 </div>
 
-<div class="row">
+@using (Html.BeginForm("GetAll", "Producto", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div class="container">
+        <div class="row justify-content-start">
+            <div class="col-3">
+                @Html.DropDownListFor(model => model.Departamento.IdDepartamento, new SelectList(Model.Departamento.Departamentos, "IdDepartamento", "Nombre"), "Selecciona un departamento", new { @class = "form-control" })
+            </div>
 
-    @foreach (ML.Producto producto in Model.Productos)
-    {
+            <div class="col-3">
+                @Html.TextBoxFor(model => model.ProductoNombre, new { @class = "form-control", @placeholder = "ProductoNombre" })
+            </div>
+
+            <div class="col-md-3">
+                <input type="submit" value="Buscar" class="btn btn-success" />
+            </div>
+
+        </div>
+
+        @*<div class="col">
+
+                @Html.ActionLink("Ver Carrito", "Producto", "VentaProducto", htmlAttributes: new { @class = "btn btn-success" })
+
+            </div>*@
+
+    </div>
+}
+
+
+@foreach (ML.Producto producto in Model.Productos)
+{
+    <div class="row">
+
+
         <div class="row">
             <div class="col-md-2">&nbsp;</div>
             <div class="col-md-8">
@@ -37,7 +70,8 @@
                                 @*Datos*@<div class="thumbnail-description smaller">@producto.Descipcion</div>
                                 @*Datos*@<div class="thumbnail-description smaller">@producto.PrecioUnitario</div>
                             </div>
-                            <div class="caption card-footer text-center">  @*Boton*@
+                            <div class="caption card-footer text-center">
+                                @*Boton*@
                                 <ul class="list-inline">
                                     <li><i class="people lighter"></i>@producto.Departamento.IdDepartamento</li>
                                     <li></li>
@@ -51,66 +85,37 @@
                 <div class="col-md-2">&nbsp;</div>
             </div>
         </div>
-
-
-        @*<div class="col mt-3 pt-3">
-
-
-                <div class="card text-white bg-dark border-success mb-3 border-4  " style="width: 18rem; ">
-                    <img src="img_avatar1.png" class="card-img-top" style=" height: 50%; width: 100%; ">
-                    <div class="card-body ">
-                        <h5 class="card-title card-header text-center bg-secondary" id="pNombre">@producto.ProductoNombre</h5>
-                        <p class="card-text" id="Creditos">IdProducto: @producto.IdProducto</p>
-                        <p class="card-text" id="PrecioUnitario">Precio:  @producto.PrecioUnitario</p>
-                        <p class="card-text" id="Descripcion">Descripcion: @producto.Descipcion</p>
-                        <p class="card-text" id="IdDepartamento">Departamneto: @producto.Departamento.IdDepartamento</p>
-
-
-                        <a href="@Url.Action("CartPost", "Producto", new { IdProducto = producto. IdProducto, ProductoNombre = producto. ProductoNombre, PrecioUnitario = producto.PrecioUnitario, Descripcion = producto.Descipcion})" class="btn btn-success">Agregar <i class="bi bi-cart3" style="color: khaki"></i> </a>
-
-                    </div>
-                </div>
-
-
-            </div>*@
+    </div>
 
 
 
 
+ }
 
 
 
 
+    <style>
+        .thumbnail {
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5);
+            transition: 0.3s;
+            min-width: 40%;
+            border-radius: 5px;
+        }
+
+        .thumbnail-description {
+            min-height: 40px;
+        }
+
+        .thumbnail:hover {
+            cursor: pointer;
+            box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 1);
+        }
+    </style>
 
 
 
 
-
-
-
-
-    }
-
-
-</div>
-
-<style>
-    .thumbnail {
-        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5);
-        transition: 0.3s;
-        min-width: 40%;
-        border-radius: 5px;
-    }
-
-    .thumbnail-description {
-        min-height: 40px;
-    }
-
-    .thumbnail:hover {
-        cursor: pointer;
-        box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 1);
-    }
-</style>
 
 
 

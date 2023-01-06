@@ -11,14 +11,10 @@ namespace DL_EF
 {
     using System;
     
-    public partial class ProductoGetAll_Result
+    public partial class DepartamentoGetAllBA_Result
     {
-        public int IdProducto { get; set; }
-        public string ProductoNombre { get; set; }
-        public decimal PrecioUnitario { get; set; }
-        public int Stock { get; set; }
-        public string Descripcion { get; set; }
         public int IdDepartamento { get; set; }
+        public string Nombre { get; set; }
         public Nullable<int> IdArea { get; set; }
     }
 }

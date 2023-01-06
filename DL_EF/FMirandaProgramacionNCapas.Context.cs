@@ -75,11 +75,6 @@ namespace DL_EF
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("DepartamentoDelete", idDepartamentoParameter);
         }
     
-        public virtual ObjectResult<DepartamentoGetAll_Result> DepartamentoGetAll()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<DepartamentoGetAll_Result>("DepartamentoGetAll");
-        }
-    
         public virtual ObjectResult<DepartamentoGetById_Result> DepartamentoGetById(Nullable<int> idDepartamento)
         {
             var idDepartamentoParameter = idDepartamento.HasValue ?
@@ -183,11 +178,6 @@ namespace DL_EF
                 new ObjectParameter("IdProducto", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ProductoDelete", idProductoParameter);
-        }
-    
-        public virtual ObjectResult<ProductoGetAll_Result> ProductoGetAll()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ProductoGetAll_Result>("ProductoGetAll");
         }
     
         public virtual ObjectResult<ProductoGetById_Result> ProductoGetById(Nullable<int> idProducto)
@@ -523,9 +513,40 @@ namespace DL_EF
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<AreaGetAll1_Result>("AreaGetAll1");
         }
     
-        public virtual ObjectResult<ProductoGetAll1_Result> ProductoGetAll1()
+        public virtual ObjectResult<DepartamentoGetAllArea_Result> DepartamentoGetAllArea(Nullable<int> idDepartamento)
         {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ProductoGetAll1_Result>("ProductoGetAll1");
+            var idDepartamentoParameter = idDepartamento.HasValue ?
+                new ObjectParameter("IdDepartamento", idDepartamento) :
+                new ObjectParameter("IdDepartamento", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<DepartamentoGetAllArea_Result>("DepartamentoGetAllArea", idDepartamentoParameter);
+        }
+    
+        public virtual ObjectResult<DepartamentoGetAllBA_Result> DepartamentoGetAllBA(Nullable<int> idDepartamento)
+        {
+            var idDepartamentoParameter = idDepartamento.HasValue ?
+                new ObjectParameter("IdDepartamento", idDepartamento) :
+                new ObjectParameter("IdDepartamento", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<DepartamentoGetAllBA_Result>("DepartamentoGetAllBA", idDepartamentoParameter);
+        }
+    
+        public virtual ObjectResult<ProductoGetAll_Result> ProductoGetAll(string productoNombre, Nullable<int> idDepartamento)
+        {
+            var productoNombreParameter = productoNombre != null ?
+                new ObjectParameter("ProductoNombre", productoNombre) :
+                new ObjectParameter("ProductoNombre", typeof(string));
+    
+            var idDepartamentoParameter = idDepartamento.HasValue ?
+                new ObjectParameter("IdDepartamento", idDepartamento) :
+                new ObjectParameter("IdDepartamento", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ProductoGetAll_Result>("ProductoGetAll", productoNombreParameter, idDepartamentoParameter);
+        }
+    
+        public virtual ObjectResult<DepartamentoGetAll_Result1> DepartamentoGetAll()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<DepartamentoGetAll_Result1>("DepartamentoGetAll");
         }
     }
 }

@@ -68,7 +68,16 @@
     <Compile Include="Departamento.cs">
       <DependentUpon>FMirandaProgramacionNCapas.tt</DependentUpon>
     </Compile>
+    <Compile Include="DepartamentoGetAllArea_Result.cs">
+      <DependentUpon>FMirandaProgramacionNCapas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DepartamentoGetAllBA_Result.cs">
+      <DependentUpon>FMirandaProgramacionNCapas.tt</DependentUpon>
+    </Compile>
     <Compile Include="DepartamentoGetAll_Result.cs">
+      <DependentUpon>FMirandaProgramacionNCapas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DepartamentoGetAll_Result1.cs">
       <DependentUpon>FMirandaProgramacionNCapas.tt</DependentUpon>
     </Compile>
     <Compile Include="DepartamentoGetById_Result.cs">
@@ -114,9 +123,6 @@
       <DependentUpon>FMirandaProgramacionNCapas.tt</DependentUpon>
     </Compile>
     <Compile Include="Producto.cs">
-      <DependentUpon>FMirandaProgramacionNCapas.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ProductoGetAll1_Result.cs">
       <DependentUpon>FMirandaProgramacionNCapas.tt</DependentUpon>
     </Compile>
     <Compile Include="ProductoGetAll_Result.cs">

@@ -14,8 +14,6 @@ namespace ML
 
         public List<object> Departamentos { get; set; }
 
-        public List<object> Departamentoes { get; set; }
-
         public ML.Area Area { get; set; } //  declarada como una propiedad
 
         //public List<object> Areas { get; set; }

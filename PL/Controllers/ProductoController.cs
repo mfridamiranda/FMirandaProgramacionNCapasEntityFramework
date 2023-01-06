@@ -9,48 +9,47 @@ namespace PL.Controllers
     public class ProductoController : Controller
     {
         //GET: Carrito
-
+        [HttpGet]
        public ActionResult GetAll()
        {
-            ML.Departamento departamento = new ML.Departamento();
-
-            ML.Result result = BL.Producto.GetAllEF();
-
+          
             ML.Producto producto = new ML.Producto();
+            producto.Departamento = new ML.Departamento();
 
-            if (result.Correct)
-            {
-                producto.Productos = result.Objects;
-            }
-            else
-            {
-                ViewBag.Message = "Ocurrio un error";
-            }
+            ML.Result result = BL.Producto.GetAllEF(producto);
+
+            ML.Result resultDepartamento = BL.Departamento.GetAllEF();
+
+            producto.Departamento.Departamentos = resultDepartamento.Objects;
+            producto.Productos = result.Objects;
+            //result = BL.Producto.GetAllEF();
+
             return View(producto);
+
+         
        }
 
-        //form
+        [HttpPost]
 
-        //[HttpGet]
+        public ActionResult GetAll(ML.Producto producto)
+        {
+            producto.ProductoNombre = (producto.ProductoNombre == null) ? "" : producto.ProductoNombre;
 
-        //public ActionResult Form(int? IdProducto)
-        //{
-        //    ML.Result resultDepartamento = BL.Departamento.GetAllEF();
-        //    ML.Producto producto = new ML.Producto();
+            producto.Departamento.IdDepartamento = producto.Departamento.IdDepartamento == null  ? 0 : producto.Departamento.IdDepartamento; //se pone 0 en donde van las comillas por que el valor que es entero
 
-        //    producto.Departamento = new ML.Departamento();
-        //    if (IdProducto == null)
-        //    {
-        //        producto.Departamento.Departamentoes = resultDepartamento.Objects;
+            ML.Result result = BL.Producto.GetAllEF(producto);
+            producto.Productos = result.Objects;
 
-        //        return View(producto);
-        //    }
-           
+            ML.Result resultDepartamento = BL.Departamento.GetAllEF();
+            producto.Departamento.Departamentos = resultDepartamento.Objects;
+
+            return View(producto);
+        }
 
 
-        //}
 
-    
+
+
 
     }
 }
